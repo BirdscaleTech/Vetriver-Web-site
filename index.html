@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetriver — One Plant, Universal Solution</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-light: #4a8c5c;
+    --green-pale: #a8c9a0;
+    --earth: #7a5c3a;
+    --earth-light: #c49a6c;
+    --cream: #f5f0e8;
+    --ivory: #faf7f2;
+    --gold: #c8a847;
+    --gold-light: #e8c96a;
+    --text-dark: #1e1a14;
+    --text-mid: #4a4030;
+    --text-light: #8a7a6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--ivory);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    background: rgba(26,58,42,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,71,0.2);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); font-style: italic; }
+
+  nav { display: flex; gap: 2.4rem; align-items: center; }
+  nav a {
+    text-decoration: none;
+    color: rgba(245,240,232,0.78);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  nav a:hover { color: var(--gold-light); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--green-deep) !important;
+    padding: 9px 22px;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    transition: background 0.25s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--green-deep);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(74,140,92,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,168,71,0.08) 0%, transparent 60%);
+  }
+
+  /* Botanical line art bg */
+  .hero-bg-art {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 55%;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2px,
+      rgba(168,201,160,0.5) 2px,
+      rgba(168,201,160,0.5) 3px
+    );
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 8% 80px 8%;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-pale);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green-deep);
+    padding: 14px 32px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    border: 1px solid rgba(245,240,232,0.3);
+    color: var(--cream);
+    padding: 14px 32px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(245,240,232,0.12);
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 5%;
+  }
+
+  /* Vetiver plant SVG illustration */
+  .plant-container {
+    position: relative;
+    width: 360px;
+    height: 420px;
+    animation: floatPlant 6s ease-in-out infinite;
+  }
+
+  @keyframes floatPlant {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .plant-glow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 80px;
+    background: radial-gradient(ellipse, rgba(74,140,92,0.4) 0%, transparent 70%);
+    filter: blur(20px);
+  }
+
+  .plant-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Benefit badges */
+  .badge {
+    position: absolute;
+    background: rgba(26,58,42,0.9);
+    border: 1px solid rgba(200,168,71,0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 1s ease both;
+  }
+  .badge-icon { font-size: 1.2rem; }
+  .badge-text { font-size: 0.72rem; letter-spacing: 0.05em; color: var(--cream); font-weight: 500; }
+  .badge-1 { top: 60px; right: -10px; animation-delay: 0.8s; }
+  .badge-2 { top: 50%; right: -20px; animation-delay: 1s; }
+  .badge-3 { bottom: 80px; left: -20px; animation-delay: 1.2s; }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 100px 8%; }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: var(--green-deep);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  /* ─── BENEFITS TICKER ─── */
+  .ticker-wrap {
+    background: var(--green-mid);
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 25s linear infinite;
+    gap: 60px;
+  }
+  .ticker-item {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .ticker-item::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* ─── PRODUCTS SECTION ─── */
+  #shop { background: var(--cream); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .product-card {
+    background: var(--ivory);
+    border: 1px solid rgba(26,58,42,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.35s;
+    cursor: pointer;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,58,42,0.12); }
+
+  .product-img {
+    height: 220px;
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(74,140,92,0.3) 0%, var(--green-deep) 70%);
+  }
+
+  .product-illustration {
+    position: relative;
+    z-index: 1;
+    font-size: 5rem;
+    filter: drop-shadow(0 4px 20px rgba(200,168,71,0.3));
+  }
+
+  .product-badge-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+
+  .product-info { padding: 1.5rem; }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 0.4rem;
+  }
+  .product-desc {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .product-lifespan {
+    font-size: 0.73rem;
+    color: var(--green-mid);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .product-lifespan::before { content: '⏱'; font-size: 0.9rem; }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--green-deep);
+  }
+  .product-price span {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+  }
+
+  .add-to-cart {
+    background: var(--green-deep);
+    color: var(--cream);
+    border: none;
+    padding: 10px 18px;
+    font-size: 0.75rem;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .add-to-cart:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  /* ─── BENEFITS SECTION ─── */
+  #benefits {
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  #benefits .section-title { color: var(--cream); }
+  #benefits .section-sub { color: rgba(245,240,232,0.6); }
+
+  .benefits-bg {
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,140,92,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 3.5rem;
+    background: rgba(245,240,232,0.06);
+  }
+
+  .benefit-item {
+    background: var(--green-deep);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .benefit-item::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+  .benefit-item:hover { background: rgba(74,140,92,0.12); }
+  .benefit-item:hover::after { height: 100%; }
+
+  .benefit-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(200,168,71,0.1);
+    border: 1px solid rgba(200,168,71,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .benefit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+  .benefit-desc {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.8;
+  }
+
+  .benefit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1rem;
+  }
+  .benefit-tag {
+    background: rgba(200,168,71,0.1);
+    border: 1px solid rgba(200,168,71,0.2);
+    color: var(--gold-light);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* ─── REVIEWS SECTION ─── */
+  #reviews { background: var(--ivory); }
+
+  .reviews-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+
+  .review-stat-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: var(--green-deep);
+    line-height: 1;
+  }
+  .review-stat-big span {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .review-card {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+  }
+  .review-card:hover { border-bottom-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(26,58,42,0.08); }
+
+  .review-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 0.5;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .review-text {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--cream);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--green-deep);
+  }
+  .review-location {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 4px; }
+
+  /* Video section */
+  .video-section {
+    margin-top: 4rem;
+    background: var(--green-deep);
+    border-radius: 4px;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .video-text .section-title { color: var(--cream); margin-bottom: 0.8rem; }
+  .video-text p { color: rgba(245,240,232,0.6); font-size: 0.9rem; line-height: 1.7; max-width: 420px; }
+  .play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    border: none;
+    color: var(--green-deep);
+    box-shadow: 0 0 0 0 rgba(200,168,71,0.5);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200,168,71,0.5); }
+    50% { box-shadow: 0 0 0 20px rgba(200,168,71,0); }
+  }
+
+  /* ─── HISTORY SECTION ─── */
+  #history {
+    background: var(--cream);
+    position: relative;
+  }
+
+  .history-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .history-visual {
+    position: relative;
+    height: 420px;
+  }
+
+  .history-card-main {
+    position: absolute;
+    inset: 0;
+    background: var(--green-deep);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .history-card-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.02) 10px,
+      rgba(255,255,255,0.02) 11px
+    );
+  }
+
+  .history-plant-big {
+    font-size: 8rem;
+    filter: drop-shadow(0 0 40px rgba(74,140,92,0.5));
+    animation: floatPlant 5s ease-in-out infinite;
+  }
+
+  .history-floating-card {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--gold);
+    padding: 1.5rem;
+    border-radius: 4px;
+    width: 200px;
+  }
+  .hfc-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-deep); opacity: 0.7; }
+  .hfc-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .history-points { list-style: none; margin-top: 2rem; }
+  .history-points li {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(26,58,42,0.08);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .h-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(74,140,92,0.1);
+    border: 1px solid rgba(74,140,92,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .h-text strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 4px;
+  }
+  .h-text span { font-size: 0.83rem; color: var(--text-light); line-height: 1.7; }
+
+  /* ─── MISSION SECTION ─── */
+  #mission {
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mission-bg-circle {
+    position: absolute;
+    bottom: -200px; left: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,168,71,0.08);
+  }
+  .mission-bg-circle2 {
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,140,92,0.1);
+  }
+
+  .mission-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  #mission .section-title { color: var(--cream); }
+  #mission .section-sub { color: rgba(245,240,232,0.6); margin-bottom: 2rem; }
+
+  .mission-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mission-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.3s;
+  }
+  .mission-card:hover { background: rgba(74,140,92,0.15); border-color: rgba(200,168,71,0.2); }
+  .mc-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .mc-title { font-size: 0.9rem; font-weight: 600; color: var(--cream); margin-bottom: 4px; }
+  .mc-desc { font-size: 0.82rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+  .mission-quote-block {
+    background: rgba(200,168,71,0.08);
+    border-left: 3px solid var(--gold);
+    padding: 2rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .mq-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .mq-author { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ─── FAQ SECTION ─── */
+  #faq { background: var(--ivory); }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 3rem;
+    background: rgba(26,58,42,0.08);
+  }
+
+  .faq-item {
+    background: var(--ivory);
+    padding: 2rem;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  .faq-item:hover { background: var(--cream); }
+
+  .faq-q {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--green-deep);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .faq-q::before {
+    content: 'Q';
+    background: var(--green-deep);
+    color: var(--cream);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .faq-a {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    padding-left: 34px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark);
+    padding: 60px 8% 30px;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand .logo { font-size: 1.5rem; display: inline-block; margin-bottom: 1rem; }
+  .footer-desc { font-size: 0.83rem; line-height: 1.8; max-width: 280px; }
+
+  .footer-col h4 {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.77rem;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── MOBILE NAV TOGGLE ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--cream);
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 6% 80px; }
+
+    .benefits-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .reviews-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .history-layout { grid-template-columns: 1fr; }
+    .history-visual { height: 280px; }
+    .mission-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    nav { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 6%; }
+    .video-section { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 500px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .products-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SMOOTH SCROLL HIGHLIGHT FOR ACTIVE ─── */
+  .nav-link-active { color: var(--gold-light) !important; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <a href="#" class="logo">Vetri<span>ver</span></a>
+  <nav id="main-nav">
+    <a href="#shop">Shop Mala</a>
+    <a href="#benefits">Health Benefits</a>
+    <a href="#history">Our Roots</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#mission">Our Mission</a>
+    <a href="#shop" class="nav-cta">Order Now</a>
+  </nav>
+  <button class="hamburger" onclick="document.getElementById('main-nav').style.display='flex'; document.getElementById('main-nav').style.flexDirection='column'; document.getElementById('main-nav').style.position='fixed'; document.getElementById('main-nav').style.inset='72px 0 0 0'; document.getElementById('main-nav').style.background='rgba(26,58,42,0.98)'; document.getElementById('main-nav').style.padding='3rem 8%'; document.getElementById('main-nav').style.zIndex='999'; document.getElementById('main-nav').style.gap='1.5rem';">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg-art"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Ancient Siddha Wisdom · Modern Wellness</div>
+    <h1 class="hero-title">
+      One Plant,
+      <em>Universal Solution</em>
+    </h1>
+    <p class="hero-sub">
+      Vetiver (Khus) has been treasured by Tamil Siddha healers for millennia — purifying air, water &amp; soil while restoring your body's natural balance.
+    </p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-primary">Shop Vetiver Mala</a>
+      <a href="#benefits" class="btn-ghost">Discover Benefits</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">17–20</div>
+        <div class="stat-label">Years of purity</div>
+      </div>
+      <div>
+        <div class="stat-num">3-in-1</div>
+        <div class="stat-label">Purifies air, water, soil</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Natural, chemical-free</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="plant-container">
+      <div class="plant-glow"></div>
+      <!-- SVG Vetiver Plant Illustration -->
+      <svg class="plant-svg" viewBox="0 0 360 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Roots -->
+        <g opacity="0.8">
+          <path d="M180 310 Q160 340 140 380" stroke="#7a5c3a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M180 310 Q170 355 165 390" stroke="#7a5c3a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M180 310 Q185 350 180 395" stroke="#7a5c3a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M180 310 Q195 345 200 385" stroke="#7a5c3a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M180 310 Q205 340 225 375" stroke="#7a5c3a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M140 380 Q125 390 115 400" stroke="#7a5c3a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M225 375 Q235 385 245 395" stroke="#7a5c3a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M165 390 Q155 400 150 410" stroke="#7a5c3a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M200 385 Q210 395 215 408" stroke="#7a5c3a" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+        <!-- Main Stem -->
+        <ellipse cx="180" cy="318" rx="14" ry="8" fill="#5a3d28" opacity="0.6"/>
+        <!-- Leaves (tall grass-like) -->
+        <g>
+          <path d="M180 315 Q155 250 130 80" stroke="#2d5a3d" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q168 248 158 90" stroke="#3a7a50" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q175 245 172 70" stroke="#4a8c5c" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q182 240 182 60" stroke="#3a7a50" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q188 242 192 72" stroke="#4a8c5c" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q196 248 208 88" stroke="#2d5a3d" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q208 252 235 82" stroke="#3a7a50" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q145 255 120 100" stroke="#4a8c5c" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M180 315 Q220 260 248 92" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Lighter green highlights -->
+          <path d="M180 315 Q162 252 148 86" stroke="#68b07a" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <path d="M180 315 Q200 245 218 78" stroke="#68b07a" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+        </g>
+        <!-- Gold shimmer dots -->
+        <circle cx="130" cy="82" r="3" fill="#c8a847" opacity="0.5"/>
+        <circle cx="172" cy="72" r="2.5" fill="#c8a847" opacity="0.4"/>
+        <circle cx="235" cy="84" r="3" fill="#c8a847" opacity="0.5"/>
+        <circle cx="182" cy="62" r="2" fill="#e8c96a" opacity="0.6"/>
+      </svg>
+
+      <!-- Benefit badges -->
+      <div class="badge badge-1">
+        <span class="badge-icon">🌿</span>
+        <span class="badge-text">Purifies Air</span>
+      </div>
+      <div class="badge badge-2">
+        <span class="badge-icon">💧</span>
+        <span class="badge-text">Cleanses Water</span>
+      </div>
+      <div class="badge badge-3">
+        <span class="badge-icon">🌙</span>
+        <span class="badge-text">Deep Sleep</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">Purifies Air Naturally</span>
+    <span class="ticker-item">Chrysopogon Zizanioides</span>
+    <span class="ticker-item">Siddha Healing Tradition</span>
+    <span class="ticker-item">17–20 Year Lifespan</span>
+    <span class="ticker-item">Zero Chemicals</span>
+    <span class="ticker-item">Farmer Empowerment</span>
+    <span class="ticker-item">Sinus &amp; Asthma Relief</span>
+    <span class="ticker-item">Deep Sleep Restoration</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Purifies Air Naturally</span>
+    <span class="ticker-item">Chrysopogon Zizanioides</span>
+    <span class="ticker-item">Siddha Healing Tradition</span>
+    <span class="ticker-item">17–20 Year Lifespan</span>
+    <span class="ticker-item">Zero Chemicals</span>
+    <span class="ticker-item">Farmer Empowerment</span>
+    <span class="ticker-item">Sinus &amp; Asthma Relief</span>
+    <span class="ticker-item">Deep Sleep Restoration</span>
+  </div>
+</div>
+
+<!-- ── SHOP ── -->
+<section id="shop">
+  <div class="reveal">
+    <div class="section-eyebrow">Vetiver Garlands</div>
+    <h2 class="section-title">Shop Vetiver Mala</h2>
+    <p class="section-sub">Handcrafted from pure vetiver roots. Each garland is a living air purifier that works silently for up to 20 years.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- Product 1 -->
+    <div class="product-card reveal">
+      <div class="product-img">
+        <div class="product-img-bg"></div>
+        <div class="product-illustration">🌾</div>
+        <span class="product-badge-tag">Best Seller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">1 Foot Mala</div>
+        <div class="product-desc">Perfect for small spaces, deity altars, and personal use. Place near your bed for overnight air purification.</div>
+        <div class="product-lifespan">Lasts 17–20 Years</div>
+        <div class="product-footer">
+          <div class="product-price">₹300 <span>/ piece</span></div>
+          <button class="add-to-cart" onclick="addCart(this, '1 Foot Mala')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card reveal">
+      <div class="product-img">
+        <div class="product-img-bg"></div>
+        <div class="product-illustration">🪢</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">2 Foot Mala</div>
+        <div class="product-desc">Ideal for bedrooms and mid-sized rooms. Provides deeper air cooling and moisture regulation throughout the night.</div>
+        <div class="product-lifespan">Lasts 17–20 Years</div>
+        <div class="product-footer">
+          <div class="product-price">₹550 <span>/ piece</span></div>
+          <button class="add-to-cart" onclick="addCart(this, '2 Foot Mala')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card reveal">
+      <div class="product-img">
+        <div class="product-img-bg"></div>
+        <div class="product-illustration">🌿</div>
+        <span class="product-badge-tag">Popular</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">3 Foot Mala</div>
+        <div class="product-desc">Great for living rooms and larger bedrooms. A versatile size for whole-room wellness and air purification.</div>
+        <div class="product-lifespan">Lasts 17–20 Years</div>
+        <div class="product-footer">
+          <div class="product-price">₹800 <span>/ piece</span></div>
+          <button class="add-to-cart" onclick="addCart(this, '3 Foot Mala')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 4 — Nilavu Mala -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #1a3a2a 0%, #3d2810 100%);">
+        <div class="product-img-bg" style="background: radial-gradient(ellipse at center, rgba(200,168,71,0.25) 0%, transparent 70%);"></div>
+        <div class="product-illustration">🚪</div>
+        <span class="product-badge-tag" style="background: var(--earth-light); color: var(--green-deep);">Nilavu Mala</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">5–6 Foot Door Mala</div>
+        <div class="product-desc">The grand Nilavu Mala — designed for entrances and doorways. Cools and purifies entire living spaces as guests enter.</div>
+        <div class="product-lifespan">Lasts 17–20 Years</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,200 <span>/ piece</span></div>
+          <button class="add-to-cart" onclick="addCart(this, 'Nilavu Mala')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFITS ── -->
+<section id="benefits">
+  <div class="benefits-bg"></div>
+  <div class="reveal">
+    <div class="section-eyebrow" style="color:var(--gold)">Triple-Action Natural Power</div>
+    <h2 class="section-title">Why Choose Vetiver?</h2>
+    <p class="section-sub">Ancient Siddha healers called it "nature's universal solution." Modern science confirms what they always knew.</p>
+  </div>
+
+  <div class="benefits-grid" style="margin-top:3.5rem">
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">🌬️</div>
+      <div class="benefit-title">Air Purification &amp; Cooling</div>
+      <div class="benefit-desc">Vetiver actively absorbs carbon monoxide and sulfur from your air. Its natural cooling effect increases room moisture — so intense that you may not need a fan on full speed anymore.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">CO Absorption</span>
+        <span class="benefit-tag">Sulfur Removal</span>
+        <span class="benefit-tag">Natural Cooling</span>
+      </div>
+    </div>
+
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">🫁</div>
+      <div class="benefit-title">Respiratory Relief</div>
+      <div class="benefit-desc">Regular exposure to vetiver's natural vapors provides relief from sinus congestion, asthma episodes, and even supports recovery from tuberculosis. Breathe freely — naturally.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">Sinus Relief</span>
+        <span class="benefit-tag">Asthma Support</span>
+        <span class="benefit-tag">TB Recovery</span>
+      </div>
+    </div>
+
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">🌙</div>
+      <div class="benefit-title">Deep Sleep Restoration</div>
+      <div class="benefit-desc">Place a Vetiver Mala near your pillow and experience deep, rapid sleep onset. Its unique cooling properties calm an overactive nervous system, offering natural insomnia relief and eye relaxation.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">Insomnia Relief</span>
+        <span class="benefit-tag">Eye Relaxation</span>
+        <span class="benefit-tag">Deep Rest</span>
+      </div>
+    </div>
+
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">💪</div>
+      <div class="benefit-title">Body Restoration</div>
+      <div class="benefit-desc">Vetiver's systemic cooling properties also assist in managing obesity, relieving joint pain, and stabilizing the body's internal temperature — a true full-body tonic.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">Weight Management</span>
+        <span class="benefit-tag">Joint Relief</span>
+        <span class="benefit-tag">Internal Cooling</span>
+      </div>
+    </div>
+
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">💧</div>
+      <div class="benefit-title">Water &amp; Soil Purification</div>
+      <div class="benefit-desc">Beyond your home, vetiver roots go 6–8 feet deep and actively cleanse soil and water from heavy metals, toxins, and pollutants. It is literally a root-level earth healer.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">Water Cleansing</span>
+        <span class="benefit-tag">Soil Detox</span>
+        <span class="benefit-tag">Eco Restoration</span>
+      </div>
+    </div>
+
+    <div class="benefit-item reveal">
+      <div class="benefit-icon">⏳</div>
+      <div class="benefit-title">20-Year Durability</div>
+      <div class="benefit-desc">One Vetiver Mala lasts 17 to 20 years as an active air purifier. Compare that to any electronic air purifier — the cost, the maintenance, the plastic. Nature wins, every time.</div>
+      <div class="benefit-tags">
+        <span class="benefit-tag">17–20 Year Life</span>
+        <span class="benefit-tag">Zero Maintenance</span>
+        <span class="benefit-tag">Chemical-Free</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews">
+  <div class="reviews-intro">
+    <div class="reveal">
+      <div class="section-eyebrow">Real Transformations</div>
+      <h2 class="section-title">Lives Changed by Vetiver</h2>
+      <p class="section-sub">Video testimonials have driven over ₹13 Lakhs in orders. Real stories, real healing.</p>
+    </div>
+    <div class="reveal" style="text-align:right">
+      <div class="review-stat-big">1,300+<span>Happy Customers</span></div>
+    </div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">My sinus problem of 8 years disappeared within 3 weeks of hanging the Vetiver Mala in my bedroom. I sleep without a blocked nose for the first time in nearly a decade.</div>
+      <div class="review-author">
+        <div class="review-avatar">R</div>
+        <div>
+          <div class="review-name">Rajeshwari M.</div>
+          <div class="review-location">Chennai, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">My son has had asthma since childhood. After placing the 3 Foot Mala in his room, his inhaler usage dropped by more than half. Our doctor was amazed at the improvement in his lung function.</div>
+      <div class="review-author">
+        <div class="review-avatar">P</div>
+        <div>
+          <div class="review-name">Priya Kumari</div>
+          <div class="review-location">Coimbatore, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">I was skeptical at first — but the cooling effect is absolutely real. Even on a hot night, my bedroom feels like it has a gentle natural AC. My insomnia has improved dramatically.</div>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <div class="review-name">Karthikeyan S.</div>
+          <div class="review-location">Madurai, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">We hung the Nilavu Mala at our entrance and the whole house feels fresher. Even our guests notice something different and ask what we changed. It's like ancient wisdom built into our home.</div>
+      <div class="review-author">
+        <div class="review-avatar">V</div>
+        <div>
+          <div class="review-name">Vijayalakshmi N.</div>
+          <div class="review-location">Tirunelveli, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">The joint pain in my knees has noticeably reduced. I read that vetiver's cooling stabilizes inflammation and body heat — I believe it now. Two months in and I'm walking with much less discomfort.</div>
+      <div class="review-author">
+        <div class="review-avatar">M</div>
+        <div>
+          <div class="review-name">Murugesan A.</div>
+          <div class="review-location">Salem, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="review-quote">"</div>
+      <div class="review-text">Worth every rupee. I've bought expensive HEPA filters before — this 1 Foot Mala at ₹300 outperforms all of them and will last 20 years. I've ordered 4 more for family members.</div>
+      <div class="review-author">
+        <div class="review-avatar">A</div>
+        <div>
+          <div class="review-name">Ananthi D.</div>
+          <div class="review-location">Trichy, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video CTA Block -->
+  <div class="video-section reveal">
+    <div class="video-text">
+      <h2 class="section-title" style="font-size:1.8rem">See the Proof in Motion</h2>
+      <p>Watch real customer testimonials — people who reversed breathing trouble, transformed their sleep, and reclaimed their health with a simple vetiver garland. No chemicals. No side effects. Just nature.</p>
+      <a href="#" class="btn-primary" style="margin-top:1.5rem; display:inline-block">Watch Video Reviews</a>
+    </div>
+    <button class="play-btn">▶</button>
+  </div>
+</section>
+
+<!-- ── HISTORY ── -->
+<section id="history">
+  <div class="history-layout">
+    <div class="history-visual reveal">
+      <div class="history-card-main">
+        <div class="history-plant-big">🌾</div>
+      </div>
+      <div class="history-floating-card">
+        <div class="hfc-label">Scientific Name</div>
+        <div class="hfc-value">Chrysopogon<br>Zizanioides</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="section-eyebrow">Going Back to the Roots</div>
+      <h2 class="section-title">4,000 Years of Ancient Healing</h2>
+      <p class="section-sub">Tamil Siddha spiritual scientists — among the world's earliest medical practitioners — identified Vetiver (Khus / வெட்டிவேர்) as the planet's most powerful cooling, stabilizing, and purifying plant.</p>
+
+      <ul class="history-points">
+        <li>
+          <div class="h-icon">🌿</div>
+          <div class="h-text">
+            <strong>Siddha Tradition</strong>
+            <span>Ancient Tamil Siddha healers prescribed Vetiver for fever, inflammation, and purifying the environment. Its scientific name, Chrysopogon zizanioides, means "golden beard" — a nod to its luminous roots.</span>
+          </div>
+        </li>
+        <li>
+          <div class="h-icon">🌍</div>
+          <div class="h-text">
+            <strong>A Global Healer</strong>
+            <span>Known as Khus in North India, Vetiver is used across Southeast Asia, Africa, and the Caribbean for soil conservation, water purification, and natural medicine. The World Bank has called it one of the most effective erosion-control plants on Earth.</span>
+          </div>
+        </li>
+        <li>
+          <div class="h-icon">⚗️</div>
+          <div class="h-text">
+            <strong>Modern Science Confirms</strong>
+            <span>Research confirms vetiver roots contain over 100 sesquiterpene compounds. These volatile compounds actively neutralize airborne toxins, provide antibacterial effects, and create the distinctive earthy cooling aroma.</span>
+          </div>
+        </li>
+        <li>
+          <div class="h-icon">🇮🇳</div>
+          <div class="h-text">
+            <strong>Tamil Nadu's Living Heritage</strong>
+            <span>Cultivated extensively in Villupuram, Dindigul, and Salem districts. Each root woven into a Vetiver Mala carries the soil, the sun, and the soul of Tamil Nadu's farming communities.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── MISSION ── -->
+<section id="mission">
+  <div class="mission-bg-circle"></div>
+  <div class="mission-bg-circle2"></div>
+
+  <div class="mission-layout">
+    <div class="reveal">
+      <div class="section-eyebrow" style="color:var(--gold)">Beyond Personal Wellness</div>
+      <h2 class="section-title">Our Mission &amp; Social Impact</h2>
+      <p class="section-sub">When you buy a Vetiver Mala, you do far more than purify your home. You become part of a movement rooted in community, dignity, and the earth.</p>
+
+      <div class="mission-quote-block" style="margin-top:2rem">
+        <div class="mq-text">"Going back to the roots — of the plant, and of our community. Wellness that heals both the person and the land."</div>
+        <div class="mq-author">— Vetriver Founding Vision</div>
+      </div>
+    </div>
+
+    <div class="mission-cards reveal">
+      <div class="mission-card">
+        <div class="mc-icon">👩‍🌾</div>
+        <div>
+          <div class="mc-title">Empowering Women</div>
+          <div class="mc-desc">Every Mala is handcrafted by women in rural and backward communities, providing dignified work-from-home employment and financial independence.</div>
+        </div>
+      </div>
+
+      <div class="mission-card">
+        <div class="mc-icon">🌾</div>
+        <div>
+          <div class="mc-title">Supporting Farmers</div>
+          <div class="mc-desc">We source directly from verified, soil-tested vetiver farmers. Direct payments to farmers — no middlemen, no exploitation of the supply chain.</div>
+        </div>
+      </div>
+
+      <div class="mission-card">
+        <div class="mc-icon">🏡</div>
+        <div>
+          <div class="mc-title">Community Economics</div>
+          <div class="mc-desc">Our lean, trust-based network keeps costs low and value high — transparent pricing from ₹300 to ₹1,200 that supports the entire chain from field to home.</div>
+        </div>
+      </div>
+
+      <div class="mission-card">
+        <div class="mc-icon">🌍</div>
+        <div>
+          <div class="mc-title">Environmental Restoration</div>
+          <div class="mc-desc">Vetiver cultivation prevents soil erosion, replenishes groundwater, and removes heavy metals from degraded land. Growing it heals the earth.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="reveal">
+    <div class="section-eyebrow">Got Questions?</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know before your first Vetiver Mala.</p>
+  </div>
+
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <div class="faq-q">How long does one Vetiver Mala last?</div>
+      <div class="faq-a">Each Mala remains effective as a natural air purifier for 17 to 20 years — without any maintenance, electricity, or filter replacements needed.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Where should I place the Mala in my home?</div>
+      <div class="faq-a">Hang the 1–3 Foot Mala in your bedroom, near your sleeping area, or beside deity pictures. The 5–6 Foot Nilavu Mala is designed specifically for doors and entrances to purify entire living spaces.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How quickly will I notice results?</div>
+      <div class="faq-a">Most customers report feeling the cooling effect from the first night. Health improvements for sinus, asthma, and sleep typically become noticeable within 2–4 weeks of regular nightly exposure.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Is Vetiver safe for children and elderly?</div>
+      <div class="faq-a">Absolutely. Vetiver is 100% natural with no synthetic chemicals or fragrances. It is safe for infants, children, pregnant women, the elderly, and pets.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Does the Mala need water or special care?</div>
+      <div class="faq-a">No maintenance is required. You can lightly mist the Mala with water on dry days to intensify its cooling and aroma, but this is optional. Simply hang it and let it work.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How does vetiver help with insomnia?</div>
+      <div class="faq-a">Vetiver's sesquiterpene compounds have a natural sedative and cooling effect on the nervous system. Placing a Mala near your head while sleeping calms an overactive mind and promotes deep, rapid sleep onset.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Can I use it alongside my existing air purifier?</div>
+      <div class="faq-a">Yes. Vetiver Mala complements electronic purifiers by adding natural moisture, cooling, and organic compound absorption. Many customers find they reduce fan or AC usage after installing a Mala.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How is delivery and payment handled?</div>
+      <div class="faq-a">Orders are securely paid via UPI or bank transfer directly to our head office, eliminating any local fraud risk. We ship pan-India and provide tracking for every order.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">Vetri<span>ver</span></a>
+      <p class="footer-desc">Bringing 4,000 years of Tamil Siddha wisdom to your home. One plant, one mission — natural wellness for every household.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#shop">1 Foot Mala — ₹300</a>
+      <a href="#shop">2 Foot Mala — ₹550</a>
+      <a href="#shop">3 Foot Mala — ₹800</a>
+      <a href="#shop">Nilavu Mala — ₹1,200</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <a href="#benefits">Health Benefits</a>
+      <a href="#history">Our Roots</a>
+      <a href="#reviews">Customer Stories</a>
+      <a href="#faq">FAQs</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="#">WhatsApp Us</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Vetriver. All rights reserved.</span>
+    <span>Rooted in Tamil Nadu · Grown for the World</span>
+  </div>
+</footer>
+
+<!-- ── CART TOAST ── -->
+<div id="cart-toast" style="
+  position:fixed; bottom:24px; right:24px;
+  background:var(--green-deep); color:var(--cream);
+  padding:14px 22px; border-radius:4px;
+  font-size:0.85rem; font-family:'Jost',sans-serif;
+  border-left:3px solid var(--gold);
+  transform:translateX(120%); transition:transform 0.4s ease;
+  z-index:9000; max-width:280px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+">
+  <div id="cart-toast-msg">Added to cart!</div>
+</div>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Cart toast
+  function addCart(btn, name) {
+    const toast = document.getElementById('cart-toast');
+    document.getElementById('cart-toast-msg').textContent = `✓  ${name} added to cart!`;
+    toast.style.transform = 'translateX(0)';
+    btn.textContent = '✓ Added!';
+    btn.style.background = 'var(--green-light)';
+    setTimeout(() => {
+      toast.style.transform = 'translateX(120%)';
+      btn.textContent = 'Add to Cart';
+      btn.style.background = '';
+    }, 2600);
+  }
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    document.querySelectorAll('nav a').forEach(a => {
+      a.classList.remove('nav-link-active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('nav-link-active');
+    });
+  });
+</script>
+</body>
+</html>
