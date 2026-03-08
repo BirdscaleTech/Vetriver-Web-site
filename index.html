@@ -1227,9 +1227,24 @@ footer {
   font-size: 12.5px; background: white;
 }
 
-/* ================================================================
-   SCROLL REVEAL
-================================================================ */
+/* Real image handling */
+.p-img-wrap img,
+.hero-main-img img,
+.collage-img img,
+.blog-img img,
+.reel-card img,
+.step-img img,
+.hg-icon-box img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.p-card:hover .p-img-wrap img { transform: scale(1.04); }
+
+/* Logo: always show, never collapse */
+.site-logo { min-width: 120px; }
+.logo-img { height: 42px; width: auto; display: block; object-fit: contain; }
+.logo-text { display: none; font-size: 20px; font-weight: 700; color: var(--forest); letter-spacing:-.02em; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.d1 { transition-delay: .08s; }
 .reveal.d2 { transition-delay: .16s; }
@@ -1523,28 +1538,29 @@ footer {
     <!-- Desktop Nav -->
     <nav class="main-nav" role="navigation" aria-label="Main navigation">
       <div class="nav-item">
-        <a href="#shop" class="nav-link">Shop Mala</a>
+        <a href="shop.html" class="nav-link">Shop Mala</a>
         <div class="nav-dropdown">
-          <a href="#shop" class="dd-item">1 Foot Mala <span class="dd-price">Rs 300</span></a>
-          <a href="#shop" class="dd-item">2 Foot Mala <span class="dd-price">Rs 550</span></a>
-          <a href="#shop" class="dd-item">3 Foot Mala <span class="dd-price">Rs 800</span></a>
-          <a href="#shop" class="dd-item">Nilavu Mala (5 to 6 ft) <span class="dd-price">Rs 1,200</span></a>
+          <a href="shop.html#prod1" class="dd-item">1 Foot Mala <span class="dd-price">Rs 300</span></a>
+          <a href="shop.html#prod2" class="dd-item">2 Foot Mala <span class="dd-price">Rs 550</span></a>
+          <a href="shop.html#prod3" class="dd-item">3 Foot Mala <span class="dd-price">Rs 800</span></a>
+          <a href="shop.html#prod4" class="dd-item">Nilavu Mala (5 to 6 ft) <span class="dd-price">Rs 1,200</span></a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="#health-goals" class="nav-link">Health Goals</a>
+        <a href="shop.html#health-goals" class="nav-link">Health Goals</a>
         <div class="nav-dropdown">
-          <a href="#health-goals" class="dd-item">Breathing and Sinus</a>
-          <a href="#health-goals" class="dd-item">Sleep and Insomnia</a>
-          <a href="#health-goals" class="dd-item">Air Purification</a>
-          <a href="#health-goals" class="dd-item">Joint and Body Care</a>
-          <a href="#health-goals" class="dd-item">Weight and Cooling</a>
+          <a href="shop.html#health-goals" class="dd-item">Breathing and Sinus</a>
+          <a href="shop.html#health-goals" class="dd-item">Sleep and Insomnia</a>
+          <a href="shop.html#health-goals" class="dd-item">Air Purification</a>
+          <a href="shop.html#health-goals" class="dd-item">Joint and Body Care</a>
+          <a href="shop.html#health-goals" class="dd-item">Weight and Cooling</a>
         </div>
       </div>
-      <a href="#story" class="nav-link">Our Roots</a>
-      <a href="#reviews" class="nav-link">Reviews</a>
-      <a href="#reels" class="nav-link">Reels</a>
-      <a href="#blog" class="nav-link">Stories</a>
+      <a href="about.html" class="nav-link">Our Roots</a>
+      <a href="index.html#reviews" class="nav-link">Reviews</a>
+      <a href="index.html#reels" class="nav-link">Reels</a>
+      <a href="blog.html" class="nav-link">Stories</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </nav>
 
     <!-- Header Actions -->
@@ -1572,14 +1588,15 @@ footer {
 
 <!-- Mobile Navigation Panel -->
 <nav class="mobile-panel" id="mobile-panel" aria-label="Mobile navigation">
-  <a class="mob-nav-link" href="#shop" onclick="closeNav()">Shop Mala</a>
-  <a class="mob-nav-link" href="#health-goals" onclick="closeNav()">Health Goals</a>
-  <a class="mob-nav-link" href="#story" onclick="closeNav()">Our Roots</a>
-  <a class="mob-nav-link" href="#reviews" onclick="closeNav()">Reviews</a>
-  <a class="mob-nav-link" href="#reels" onclick="closeNav()">Reels</a>
-  <a class="mob-nav-link" href="#blog" onclick="closeNav()">Stories</a>
+  <a class="mob-nav-link" href="shop.html" onclick="closeNav()">Shop Mala</a>
+  <a class="mob-nav-link" href="shop.html#health-goals" onclick="closeNav()">Health Goals</a>
+  <a class="mob-nav-link" href="about.html" onclick="closeNav()">Our Roots</a>
+  <a class="mob-nav-link" href="index.html#reviews" onclick="closeNav()">Reviews</a>
+  <a class="mob-nav-link" href="index.html#reels" onclick="closeNav()">Reels</a>
+  <a class="mob-nav-link" href="blog.html" onclick="closeNav()">Stories</a>
+  <a class="mob-nav-link" href="contact.html" onclick="closeNav()">Contact</a>
   <div style="margin-top:28px">
-    <a href="#shop" class="btn-primary" style="display:block;text-align:center" onclick="closeNav()">Order Now</a>
+    <a href="shop.html" class="btn-primary" style="display:block;text-align:center" onclick="closeNav()">Order Now</a>
   </div>
 </nav>
 
@@ -1623,15 +1640,7 @@ footer {
         </div>
       </div>
       <div class="hero-main-img">
-        <!--
-          REPLACE WITH AI-GENERATED IMAGE:
-          Prompt: "A beautifully arranged vetiver root garland (mala) on
-          a natural linen background with warm golden light, product photography,
-          minimalist, organic lifestyle brand"
-        -->
-        <div class="img-ph" style="min-height:500px">
-          <span class="ph-label">AI Image: Vetiver Mala Product Shot<br>Replace src with generated image</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala displayed beautifully" style="min-height:500px"/>
       </div>
       <div class="hero-badge-card">
         <div class="hbc-top">Air Purifier</div>
@@ -1685,38 +1694,35 @@ footer {
     <div class="hg-grid">
       <div class="hg-card active reveal d1" onclick="filterByGoal(this, 'all')">
         <div class="hg-icon-box">
-          <!--
-            REPLACE: AI Image prompt: "vetiver plant roots close-up, flat lay, natural green"
-          -->
-          <div class="img-ph img-ph-light"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="All Products"/>
         </div>
         <div class="hg-label">All Products</div>
         <div class="hg-sub">Complete collection</div>
       </div>
       <div class="hg-card reveal d2" onclick="filterByGoal(this, 'breathing')">
         <div class="hg-icon-box">
-          <div class="img-ph"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Breathing and Sinus"/>
         </div>
         <div class="hg-label">Breathing and Sinus</div>
         <div class="hg-sub">Asthma, TB, Congestion</div>
       </div>
       <div class="hg-card reveal d3" onclick="filterByGoal(this, 'sleep')">
         <div class="hg-icon-box">
-          <div class="img-ph img-ph-dark"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Sleep and Insomnia"/>
         </div>
         <div class="hg-label">Sleep and Insomnia</div>
         <div class="hg-sub">Deep rest, eye relief</div>
       </div>
       <div class="hg-card reveal d4" onclick="filterByGoal(this, 'air')">
         <div class="hg-icon-box">
-          <div class="img-ph img-ph-light"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Air Purification"/>
         </div>
         <div class="hg-label">Air Purification</div>
         <div class="hg-sub">CO, sulfur, moisture</div>
       </div>
       <div class="hg-card reveal" onclick="filterByGoal(this, 'body')">
         <div class="hg-icon-box">
-          <div class="img-ph img-ph-warm"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Body and Weight"/>
         </div>
         <div class="hg-label">Body and Weight</div>
         <div class="hg-sub">Joint pain, obesity</div>
@@ -1742,14 +1748,7 @@ footer {
       <!-- Product 1: 1 Foot -->
       <div class="p-card reveal d1" data-goals="breathing sleep air">
         <div class="p-img-wrap">
-          <!--
-            AI IMAGE PROMPT: "1 foot vetiver root garland mala, natural beige
-            background, product photography, soft warm light, minimalist"
-            Replace div below with: <img src="your-ai-image.jpg" alt="1 Foot Vetiver Mala">
-          -->
-          <div class="img-ph" style="min-height:260px">
-            <span class="ph-label">AI Image: 1 Foot Vetiver Mala<br>Product Photography</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="1 Foot Vetiver Mala"/>
           <span class="p-badge-tag badge-best">Best Seller</span>
           <button class="p-wishlist-btn" onclick="toggleWishlist(this)" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1777,13 +1776,7 @@ footer {
       <!-- Product 2: 2 Foot -->
       <div class="p-card reveal d2" data-goals="breathing sleep air">
         <div class="p-img-wrap">
-          <!--
-            AI IMAGE PROMPT: "2 foot vetiver garland neatly arranged on wooden
-            surface, warm natural lighting, organic product photography"
-          -->
-          <div class="img-ph img-ph-warm" style="min-height:260px">
-            <span class="ph-label">AI Image: 2 Foot Vetiver Mala<br>Lifestyle Product Shot</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="2 Foot Vetiver Mala"/>
           <button class="p-wishlist-btn" onclick="toggleWishlist(this)" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -1810,13 +1803,7 @@ footer {
       <!-- Product 3: 3 Foot -->
       <div class="p-card reveal d3" data-goals="breathing air body">
         <div class="p-img-wrap">
-          <!--
-            AI IMAGE PROMPT: "3 foot vetiver mala hanging on a bedroom wall,
-            natural light streaming in, serene organic home setting"
-          -->
-          <div class="img-ph" style="min-height:260px">
-            <span class="ph-label">AI Image: 3 Foot Vetiver Mala<br>Hanging in Bedroom</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="3 Foot Vetiver Mala"/>
           <span class="p-badge-tag badge-hot">Popular</span>
           <button class="p-wishlist-btn" onclick="toggleWishlist(this)" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1844,14 +1831,7 @@ footer {
       <!-- Product 4: Nilavu Mala -->
       <div class="p-card reveal d4" data-goals="air body">
         <div class="p-img-wrap">
-          <!--
-            AI IMAGE PROMPT: "5 to 6 foot traditional vetiver door garland
-            (Nilavu Mala) hanging at a South Indian home entrance, golden afternoon
-            light, earthy tones, authentic heritage photography"
-          -->
-          <div class="img-ph img-ph-soil" style="min-height:260px">
-            <span class="ph-label">AI Image: Nilavu Mala (5 to 6 ft)<br>Hanging at Door Entrance</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Nilavu Mala 5 to 6 ft"/>
           <span class="p-badge-tag badge-new">Nilavu Mala</span>
           <button class="p-wishlist-btn" onclick="toggleWishlist(this)" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1912,32 +1892,17 @@ footer {
     </div>
 
     <div class="story-img-collage reveal d2">
-      <!--
-        AI IMAGE PROMPTS:
-        Col 1 tall: "Tamil Nadu vetiver farm, golden hour, roots being harvested,
-          earthy and warm tones, documentary photography"
-        Top right: "Indian woman artisan weaving vetiver garland at home, warm
-          interior light, authentic and dignified"
-        Bottom right: "Vetiver mala hanging at a traditional South Indian home
-          entrance, morning light, cultural heritage"
-      -->
       <div class="collage-img" style="grid-row:span 2">
-        <div class="img-ph img-ph-soil" style="height:100%">
-          <span class="ph-label">AI Image:<br>Vetiver Farm<br>Tamil Nadu</span>
-        </div>
-        <div class="collage-caption">Vetiver roots from Villupuram, Tamil Nadu</div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala display Tamil Nadu" style="height:100%"/>
+        <div class="collage-caption">Vetiver Mala display in Tamil Nadu</div>
       </div>
       <div class="collage-img">
-        <div class="img-ph" style="height:100%">
-          <span class="ph-label">AI Image: Woman<br>Artisan Crafting Mala</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Handcrafted Vetiver Mala close-up" style="height:100%"/>
         <div class="collage-caption">Handcrafted by women artisans</div>
       </div>
       <div class="collage-img">
-        <div class="img-ph img-ph-warm" style="height:100%">
-          <span class="ph-label">AI Image:<br>Mala at Home Entrance</span>
-        </div>
-        <div class="collage-caption">Nilavu Mala at a South Indian home</div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Vetiver Mala at window entrance" style="height:100%"/>
+        <div class="collage-caption">Nilavu Mala at a home entrance</div>
       </div>
     </div>
   </div>
@@ -1956,8 +1921,7 @@ footer {
       <div class="step-card reveal d1">
         <div class="step-num">01</div>
         <div class="step-img">
-          <!-- AI Image Prompt: "unboxing vetiver mala, hands gently unrolling, close-up, natural light" -->
-          <div class="img-ph" style="height:60px"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Unbox Vetiver Mala"/>
         </div>
         <div class="step-title">Unbox and Unroll</div>
         <div class="step-desc">Gently unroll your Mala and let it breathe for 10 minutes. You will notice the subtle earthy, cooling fragrance immediately.</div>
@@ -1965,7 +1929,7 @@ footer {
       <div class="step-card reveal d2">
         <div class="step-num">02</div>
         <div class="step-img">
-          <div class="img-ph img-ph-light" style="height:60px"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Hang Vetiver Mala"/>
         </div>
         <div class="step-title">Hang in Your Space</div>
         <div class="step-desc">Hang near your bed, door, or window. Use 1 to 3 ft Mala for bedrooms and the Nilavu Mala for entrances and larger rooms.</div>
@@ -1973,7 +1937,7 @@ footer {
       <div class="step-card reveal d3">
         <div class="step-num">03</div>
         <div class="step-img">
-          <div class="img-ph img-ph-dark" style="height:60px"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Mist Vetiver Mala"/>
         </div>
         <div class="step-title">Mist for Intensity</div>
         <div class="step-desc">Lightly mist with water on dry days to intensify the cooling and aroma. Optional but highly recommended during summer.</div>
@@ -1981,7 +1945,7 @@ footer {
       <div class="step-card reveal d4">
         <div class="step-num">04</div>
         <div class="step-img">
-          <div class="img-ph img-ph-soil" style="height:60px"><span class="ph-label" style="font-size:9px">AI Img</span></div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Feel the difference"/>
         </div>
         <div class="step-title">Feel the Difference</div>
         <div class="step-desc">Most customers feel the cooling from night one. Breathing and sleep improvements typically emerge within 2 to 4 weeks of regular use.</div>
@@ -2141,17 +2105,9 @@ footer {
     <div class="reels-grid">
       <!-- Reel 1 -->
       <div class="reel-card reveal d1" onclick="openReel(0)">
-        <!--
-          AI IMAGE PROMPT: "vertical phone screenshot style: woman holding vetiver
-          mala near window, golden sunlight, reels thumbnail style, portrait orientation"
-        -->
-        <div class="img-ph img-ph-dark" style="height:100%">
-          <span class="ph-label" style="font-size:10px">AI Image:<br>Reel Thumbnail 1<br>9:16 Portrait</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala display" style="width:100%;height:100%;object-fit:cover;"/>
         <div class="reel-overlay"></div>
-        <div class="reel-play">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+        <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         <div class="reel-content">
           <div class="reel-views">2.4M views</div>
           <div class="reel-caption">How Vetiver cured my 10-year sinus problem overnight</div>
@@ -2160,13 +2116,9 @@ footer {
 
       <!-- Reel 2 -->
       <div class="reel-card reveal d2" onclick="openReel(1)">
-        <div class="img-ph" style="height:100%">
-          <span class="ph-label" style="font-size:10px">AI Image:<br>Reel Thumbnail 2<br>9:16 Portrait</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Vetiver Mala close up" style="width:100%;height:100%;object-fit:cover;"/>
         <div class="reel-overlay"></div>
-        <div class="reel-play">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+        <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         <div class="reel-content">
           <div class="reel-views">1.8M views</div>
           <div class="reel-caption">Natural AC without electricity: the Vetiver cooling effect</div>
@@ -2175,13 +2127,9 @@ footer {
 
       <!-- Reel 3 -->
       <div class="reel-card reveal d3" onclick="openReel(2)">
-        <div class="img-ph img-ph-warm" style="height:100%">
-          <span class="ph-label" style="font-size:10px">AI Image:<br>Reel Thumbnail 3<br>9:16 Portrait</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Vetiver Mala window" style="width:100%;height:100%;object-fit:cover;"/>
         <div class="reel-overlay"></div>
-        <div class="reel-play">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+        <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         <div class="reel-content">
           <div class="reel-views">1.2M views</div>
           <div class="reel-caption">My son's asthma improved after 6 weeks with Vetiver Mala</div>
@@ -2190,13 +2138,9 @@ footer {
 
       <!-- Reel 4 -->
       <div class="reel-card reveal d4" onclick="openReel(3)">
-        <div class="img-ph img-ph-soil" style="height:100%">
-          <span class="ph-label" style="font-size:10px">AI Image:<br>Reel Thumbnail 4<br>9:16 Portrait</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Vetiver Mala sun craft" style="width:100%;height:100%;object-fit:cover;"/>
         <div class="reel-overlay"></div>
-        <div class="reel-play">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+        <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         <div class="reel-content">
           <div class="reel-views">987K views</div>
           <div class="reel-caption">Meet Savithri: the woman who weaves your Vetiver Mala</div>
@@ -2205,13 +2149,9 @@ footer {
 
       <!-- Reel 5 -->
       <div class="reel-card reveal" onclick="openReel(4)">
-        <div class="img-ph" style="height:100%;background:linear-gradient(180deg,#1a3322,#0a1a10)">
-          <span class="ph-label" style="font-size:10px">AI Image:<br>Reel Thumbnail 5<br>9:16 Portrait</span>
-        </div>
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala staircase" style="width:100%;height:100%;object-fit:cover;"/>
         <div class="reel-overlay"></div>
-        <div class="reel-play">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+        <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         <div class="reel-content">
           <div class="reel-views">743K views</div>
           <div class="reel-caption">4,000 years of Siddha wisdom in one simple garland</div>
@@ -2247,13 +2187,7 @@ footer {
     <div class="blog-grid">
       <div class="blog-card reveal d1">
         <div class="blog-img">
-          <!--
-            AI IMAGE PROMPT: "close-up of vetiver roots and ancient Tamil Siddha
-            manuscripts, warm amber lighting, scholarly yet organic mood"
-          -->
-          <div class="img-ph" style="height:200px">
-            <span class="ph-label">AI Image: Siddha Manuscripts with Vetiver</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Siddha Vetiver Heritage"/>
         </div>
         <div class="blog-body">
           <div class="blog-cat">Siddha Science</div>
@@ -2265,13 +2199,7 @@ footer {
 
       <div class="blog-card reveal d2">
         <div class="blog-img">
-          <!--
-            AI IMAGE PROMPT: "Indian woman in traditional attire weaving vetiver
-            garland at home, warm domestic light, dignified portrait photography"
-          -->
-          <div class="img-ph img-ph-warm" style="height:200px">
-            <span class="ph-label">AI Image: Savithri the Artisan, Portrait</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Vetiver Mala artisan craft"/>
         </div>
         <div class="blog-body">
           <div class="blog-cat">Community</div>
@@ -2283,13 +2211,7 @@ footer {
 
       <div class="blog-card reveal d3">
         <div class="blog-img">
-          <!--
-            AI IMAGE PROMPT: "clean clinical-meets-nature image: vetiver roots
-            beside a human lung anatomical illustration, teal and green palette, health brand"
-          -->
-          <div class="img-ph img-ph-dark" style="height:200px">
-            <span class="ph-label">AI Image: Vetiver and Respiratory Health Visual</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala healing display"/>
         </div>
         <div class="blog-body">
           <div class="blog-cat">Health Guide</div>
