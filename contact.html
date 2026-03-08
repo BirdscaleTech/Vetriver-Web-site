@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact Us - Vetriver</title>
+<meta name="description" content="Contact Vetriver — WhatsApp support, order tracking, returns, and general enquiries. Rooted in Tamil Nadu, shipping Pan-India."/>
+<style>
+:root{
+  --forest:#1a3322;--moss:#2a5238;--fern:#3d7a52;--sage:#6aaa7e;
+  --cream:#f4efe4;--paper:#faf8f3;--ink:#1a1a18;--charcoal:#3a3830;
+  --mid:#6a6558;--light:#a09888;--border:#e4dfd4;
+  --gold:#c49a3c;--gold-lt:#dab86a;--rust:#b85a38;
+  --sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  --max:1280px;--r4:4px;--r8:8px;
+  --s1:0 1px 4px rgba(26,26,24,.06);--s2:0 4px 16px rgba(26,26,24,.10);--s3:0 12px 40px rgba(26,26,24,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sf);background:var(--paper);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:var(--sf);}
+img{display:block;max-width:100%;}
+
+/* ── ANN BAR ── */
+#ann-bar{background:var(--forest);height:36px;display:flex;align-items:center;overflow:hidden;position:relative;}
+.ann-scroll-wrap{overflow:hidden;flex:1;}
+.ann-track{display:flex;white-space:nowrap;animation:annScroll 28s linear infinite;}
+.ann-msg{flex-shrink:0;padding:0 40px;font-size:12px;font-weight:500;letter-spacing:.04em;color:rgba(244,239,228,.88);display:inline-flex;align-items:center;gap:8px;}
+.ann-msg .code{background:var(--gold);color:var(--forest);font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;}
+@keyframes annScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── HEADER ── */
+#header{position:sticky;top:0;z-index:800;background:rgba(250,248,243,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+#header.scrolled{box-shadow:var(--s2);}
+.header-wrap{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:200px 1fr 200px;align-items:center;padding:0 24px;height:64px;}
+.site-logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;object-fit:contain;display:block;}
+.logo-text{font-size:20px;font-weight:700;color:var(--forest);display:none;letter-spacing:-.02em;}
+.main-nav{display:flex;align-items:center;justify-content:center;gap:2px;}
+.nav-link{display:block;padding:8px 13px;font-size:13.5px;font-weight:500;color:var(--charcoal);transition:color .18s;position:relative;}
+.nav-link:hover,.nav-link.active{color:var(--forest);}
+.nav-link.active::after{content:'';position:absolute;bottom:-1px;left:13px;right:13px;height:2px;background:var(--gold);border-radius:1px;}
+.nav-item{position:relative;}
+.nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px);background:white;border:1px solid var(--border);border-radius:var(--r8);box-shadow:var(--s3);min-width:210px;z-index:900;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+.nav-item:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.dd-item{display:block;padding:10px 16px;font-size:13px;color:var(--charcoal);border-bottom:1px solid var(--border);transition:background .15s,padding-left .15s;}
+.dd-item:last-child{border-bottom:none;}
+.dd-item:hover{background:var(--cream);padding-left:20px;color:var(--forest);}
+.dd-item .dd-price{font-size:11.5px;color:var(--light);margin-left:4px;}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px;}
+.hdr-btn{width:38px;height:38px;border-radius:var(--r4);display:flex;align-items:center;justify-content:center;color:var(--charcoal);transition:background .18s;}
+.hdr-btn:hover{background:var(--cream);}
+.hdr-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.hdr-order-btn{background:var(--forest);color:white;padding:8px 16px;border-radius:var(--r4);font-size:13px;font-weight:600;letter-spacing:.03em;margin-left:6px;transition:background .2s;white-space:nowrap;}
+.hdr-order-btn:hover{background:var(--moss);}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;border-radius:var(--r4);}
+.hamburger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:all .28s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-panel{display:none;position:fixed;inset:0;z-index:700;background:white;padding:72px 24px 32px;overflow-y:auto;transform:translateX(-100%);transition:transform .32s;}
+.mobile-panel.open{transform:translateX(0);}
+.mob-nav-link{display:block;padding:14px 0;font-size:16px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--border);}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--forest);padding:56px 24px;}
+.page-hero-inner{max-width:var(--max);margin:0 auto;}
+.breadcrumb{font-size:12px;color:rgba(244,239,228,.4);margin-bottom:14px;}
+.breadcrumb a{color:rgba(244,239,228,.4);}
+.breadcrumb a:hover{color:var(--gold-lt);}
+.page-hero h1{font-size:clamp(28px,4vw,44px);font-weight:700;color:white;letter-spacing:-.03em;margin-bottom:8px;}
+.page-hero p{font-size:15px;color:rgba(244,239,228,.6);max-width:480px;line-height:1.7;}
+
+/* ── QUICK CONTACT CARDS ── */
+.quick-section{padding:52px 24px;background:white;border-bottom:1px solid var(--border);}
+.quick-inner{max-width:var(--max);margin:0 auto;}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;}
+.quick-card{border-radius:var(--r8);border:1.5px solid var(--border);padding:26px 22px;text-align:center;transition:border-color .25s,box-shadow .25s,transform .25s;cursor:pointer;}
+.quick-card:hover{border-color:var(--fern);box-shadow:var(--s2);transform:translateY(-4px);}
+.qc-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;background:var(--cream);}
+.qc-icon svg{width:24px;height:24px;stroke:var(--forest);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.qc-title{font-size:14.5px;font-weight:700;color:var(--forest);margin-bottom:5px;}
+.qc-sub{font-size:12.5px;color:var(--mid);line-height:1.6;margin-bottom:14px;}
+.qc-action{display:inline-block;font-size:12.5px;font-weight:600;color:var(--fern);transition:color .2s;}
+.qc-action:hover{color:var(--forest);}
+
+/* ── WHATSAPP HERO ── */
+.wa-strip{background:linear-gradient(135deg,#075e54,#128c7e);padding:40px 24px;}
+.wa-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.wa-text h2{font-size:22px;font-weight:700;color:white;margin-bottom:6px;}
+.wa-text p{font-size:14px;color:rgba(255,255,255,.7);max-width:420px;}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:white;color:#075e54;padding:12px 24px;border-radius:var(--r4);font-size:14px;font-weight:700;transition:transform .2s,box-shadow .2s;white-space:nowrap;}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+.wa-btn svg{width:22px;height:22px;fill:#25d366;}
+
+/* ── MAIN CONTACT LAYOUT ── */
+.contact-main{max-width:var(--max);margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:start;}
+
+/* FORM */
+.contact-form-wrap{background:white;border-radius:12px;border:1px solid var(--border);padding:36px;}
+.form-title{font-size:20px;font-weight:700;color:var(--forest);margin-bottom:6px;}
+.form-sub{font-size:13.5px;color:var(--mid);margin-bottom:28px;line-height:1.65;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--charcoal);margin-bottom:6px;}
+.form-input,.form-select,.form-textarea{width:100%;padding:11px 13px;border-radius:var(--r4);border:1.5px solid var(--border);background:var(--paper);font-family:var(--sf);font-size:13.5px;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--fern);box-shadow:0 0 0 3px rgba(61,122,82,.1);}
+.form-textarea{resize:vertical;min-height:110px;}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236a6558' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.form-submit{width:100%;background:var(--forest);color:white;padding:13px;border-radius:var(--r4);font-size:14px;font-weight:700;letter-spacing:.04em;transition:background .2s,transform .2s;margin-top:6px;}
+.form-submit:hover{background:var(--moss);transform:translateY(-1px);}
+.form-note{font-size:11.5px;color:var(--light);margin-top:10px;text-align:center;}
+.form-success{display:none;background:rgba(61,122,82,.08);border:1.5px solid rgba(61,122,82,.25);border-radius:var(--r8);padding:18px 20px;margin-top:18px;}
+.form-success.visible{display:block;}
+.form-success p{font-size:13.5px;color:var(--forest);font-weight:500;}
+
+/* SIDEBAR */
+.contact-sidebar{}
+.contact-info-card{background:var(--forest);border-radius:12px;padding:30px;margin-bottom:16px;color:white;}
+.ci-title{font-size:15px;font-weight:700;margin-bottom:18px;color:var(--gold-lt);}
+.ci-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;}
+.ci-row:last-child{margin-bottom:0;}
+.ci-icon{width:36px;height:36px;border-radius:var(--r4);background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.ci-icon svg{width:16px;height:16px;stroke:var(--gold-lt);fill:none;stroke-width:1.8;}
+.ci-label{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,228,.4);margin-bottom:3px;}
+.ci-value{font-size:13.5px;color:rgba(244,239,228,.85);line-height:1.55;}
+.ci-value a{color:var(--gold-lt);}
+.ci-value a:hover{color:white;}
+
+.hours-card{background:white;border:1px solid var(--border);border-radius:12px;padding:26px;}
+.hours-title{font-size:14px;font-weight:700;color:var(--forest);margin-bottom:16px;}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.hours-row:last-child{border-bottom:none;}
+.hours-day{color:var(--mid);}
+.hours-time{font-weight:600;color:var(--forest);}
+.hours-badge{background:rgba(61,122,82,.08);color:var(--fern);font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;}
+
+.faq-card{background:var(--cream);border-radius:12px;padding:26px;margin-top:16px;}
+.faq-title{font-size:14px;font-weight:700;color:var(--forest);margin-bottom:16px;}
+.faq-item{border-bottom:1px solid var(--border);padding:12px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-size:13px;font-weight:600;color:var(--forest);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.faq-q svg{width:14px;height:14px;stroke:var(--mid);flex-shrink:0;transition:transform .25s;}
+.faq-item.open .faq-q svg{transform:rotate(180deg);}
+.faq-a{font-size:12.5px;color:var(--mid);line-height:1.7;margin-top:8px;display:none;}
+.faq-item.open .faq-a{display:block;}
+
+/* ── ORDER TRACK ── */
+.track-section{background:var(--cream);padding:52px 24px;}
+.track-inner{max-width:660px;margin:0 auto;text-align:center;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:10px;justify-content:center;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;max-width:40px;height:1.5px;background:var(--gold);}
+.sec-h2{font-size:clamp(22px,2.8vw,30px);font-weight:700;letter-spacing:-.025em;color:var(--forest);margin-bottom:8px;}
+.sec-sub{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:28px;}
+.track-form{display:flex;gap:10px;max-width:440px;margin:0 auto;}
+.track-input{flex:1;padding:12px 14px;border-radius:var(--r4);border:1.5px solid var(--border);background:white;font-family:var(--sf);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s;}
+.track-input:focus{border-color:var(--fern);}
+.track-btn{background:var(--forest);color:white;padding:12px 20px;border-radius:var(--r4);font-size:13.5px;font-weight:700;white-space:nowrap;transition:background .2s;}
+.track-btn:hover{background:var(--moss);}
+
+/* ── SOCIAL SECTION ── */
+.social-section{padding:52px 24px;background:white;border-top:1px solid var(--border);}
+.social-inner{max-width:var(--max);margin:0 auto;text-align:center;}
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;max-width:640px;margin-left:auto;margin-right:auto;}
+.social-card{border-radius:var(--r8);border:1.5px solid var(--border);padding:24px 16px;text-align:center;transition:border-color .25s,transform .25s;}
+.social-card:hover{border-color:var(--fern);transform:translateY(-3px);}
+.sc-icon{width:44px;height:44px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;}
+.sc-icon svg{width:22px;height:22px;stroke:white;fill:none;stroke-width:1.8;}
+.sc-name{font-size:13px;font-weight:700;color:var(--forest);margin-bottom:3px;}
+.sc-handle{font-size:11.5px;color:var(--light);}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(244,239,228,.5);padding:52px 24px 28px;}
+.footer-inner{max-width:var(--max);margin:0 auto;}
+.footer-cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px;}
+.fc-brand .logo-img-footer{height:32px;width:auto;margin-bottom:12px;filter:brightness(0) invert(1);opacity:.85;}
+.logo-text-footer{font-size:20px;font-weight:700;color:var(--cream);display:none;margin-bottom:12px;}
+.fc-brand p{font-size:12.5px;line-height:1.8;max-width:220px;margin-bottom:14px;}
+.fc-cert{font-size:11px;font-weight:600;color:var(--sage);letter-spacing:.04em;margin-bottom:14px;}
+.fc-social{display:flex;gap:7px;}
+.social-link{width:32px;height:32px;border-radius:var(--r4);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
+.social-link:hover{background:var(--fern);transform:translateY(-2px);}
+.social-link svg{width:14px;height:14px;stroke:rgba(244,239,228,.7);fill:none;stroke-width:1.8;}
+.fc-col h5{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,228,.3);margin-bottom:15px;}
+.fc-col a{display:block;font-size:12.5px;margin-bottom:8px;color:rgba(244,239,228,.5);transition:color .18s;}
+.fc-col a:hover{color:var(--gold-lt);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:11.5px;}
+.payment-badges{display:flex;gap:5px;align-items:center;}
+.pay-pill{background:rgba(255,255,255,.07);border-radius:3px;padding:2px 8px;font-size:10.5px;font-weight:600;color:rgba(244,239,228,.45);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--forest);color:white;padding:12px 16px;border-radius:var(--r8);font-size:13px;font-weight:500;border-left:3px solid var(--gold);box-shadow:var(--s3);transform:translateY(140%);transition:transform .35s;max-width:280px;}
+#toast.visible{transform:translateY(0);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s;}
+.reveal.d1{transition-delay:.08s;}.reveal.d2{transition-delay:.16s;}.reveal.d3{transition-delay:.24s;}.reveal.d4{transition-delay:.32s;}
+.reveal.in{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .quick-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-main{grid-template-columns:1fr;gap:32px;}
+  .contact-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .contact-info-card{grid-column:1/-1;}
+}
+@media(max-width:768px){
+  .header-wrap{grid-template-columns:auto 1fr auto;}
+  .main-nav{display:none;}
+  .hamburger{display:flex;}
+  .hdr-order-btn{display:none;}
+  .quick-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .wa-inner{flex-direction:column;text-align:center;}
+  .social-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-cols{grid-template-columns:1fr 1fr;}
+  .contact-sidebar{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .quick-grid{grid-template-columns:1fr;}
+  .track-form{flex-direction:column;}
+  .footer-cols{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .contact-main{padding:40px 16px;}
+  .contact-form-wrap{padding:22px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ANN BAR -->
+<div id="ann-bar">
+  <div class="ann-scroll-wrap">
+    <div class="ann-track">
+      <span class="ann-msg">Summer Cooling Sale — Use code <span class="code">COOL20</span> for 20% off all Mala</span>
+      <span class="ann-msg">Free Pan-India Shipping on orders above Rs 999</span>
+      <span class="ann-msg">We reply on WhatsApp within 2 hours — Mon to Sat, 9 AM to 7 PM</span>
+      <span class="ann-msg">Summer Cooling Sale — Use code <span class="code">COOL20</span> for 20% off all Mala</span>
+      <span class="ann-msg">Free Pan-India Shipping on orders above Rs 999</span>
+      <span class="ann-msg">We reply on WhatsApp within 2 hours — Mon to Sat, 9 AM to 7 PM</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-wrap">
+    <a href="index.html" class="site-logo">
+      <img class="logo-img"
+           src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/VETRIVER.png"
+           alt="Vetriver"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';"/>
+      <span class="logo-text">Vetriver</span>
+    </a>
+    <nav class="main-nav">
+      <div class="nav-item">
+        <a href="shop.html" class="nav-link">Shop Mala</a>
+        <div class="nav-dropdown">
+          <a href="shop.html#prod1" class="dd-item">1 Foot Mala <span class="dd-price">Rs 300</span></a>
+          <a href="shop.html#prod2" class="dd-item">2 Foot Mala <span class="dd-price">Rs 550</span></a>
+          <a href="shop.html#prod3" class="dd-item">3 Foot Mala <span class="dd-price">Rs 800</span></a>
+          <a href="shop.html#prod4" class="dd-item">Nilavu Mala <span class="dd-price">Rs 1,200</span></a>
+        </div>
+      </div>
+      <a href="shop.html#health-goals" class="nav-link">Health Goals</a>
+      <a href="about.html" class="nav-link">Our Roots</a>
+      <a href="index.html#reviews" class="nav-link">Reviews</a>
+      <a href="blog.html" class="nav-link">Stories</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="hdr-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <a href="shop.html" class="hdr-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </a>
+      <a href="shop.html" class="hdr-order-btn">Order Now</a>
+      <button class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-panel" id="mobile-panel">
+  <a class="mob-nav-link" href="shop.html" onclick="closeNav()">Shop Mala</a>
+  <a class="mob-nav-link" href="shop.html#health-goals" onclick="closeNav()">Health Goals</a>
+  <a class="mob-nav-link" href="about.html" onclick="closeNav()">Our Roots</a>
+  <a class="mob-nav-link" href="index.html#reviews" onclick="closeNav()">Reviews</a>
+  <a class="mob-nav-link" href="blog.html" onclick="closeNav()">Stories</a>
+  <a class="mob-nav-link" href="contact.html" onclick="closeNav()">Contact</a>
+  <div style="margin-top:24px">
+    <a href="shop.html" style="display:block;text-align:center;background:var(--forest);color:white;padding:13px;border-radius:4px;font-weight:700;font-size:14px;" onclick="closeNav()">Order Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+    <h1>Talk to Us</h1>
+    <p>Questions about your order, health benefits, or wholesale enquiries — we are here every day. WhatsApp is the fastest way to reach us.</p>
+  </div>
+</div>
+
+<!-- QUICK CONTACT -->
+<div class="quick-section">
+  <div class="quick-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <p style="font-size:13px;color:var(--light);text-transform:uppercase;font-weight:700;letter-spacing:.15em;margin-bottom:8px;">How Can We Help?</p>
+      <h2 style="font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--forest);">Choose the fastest route</h2>
+    </div>
+    <div class="quick-grid">
+      <a href="https://wa.me/919999999999?text=Hi%20Vetriver%2C%20I%20need%20help%20with%20my%20order" target="_blank" class="quick-card reveal d1">
+        <div class="qc-icon" style="background:rgba(37,211,102,.1)">
+          <svg viewBox="0 0 24 24" style="stroke:#25d366"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div class="qc-title">WhatsApp Support</div>
+        <div class="qc-sub">Get a reply within 2 hours on WhatsApp. Fastest option for orders and urgent queries.</div>
+        <span class="qc-action">Chat Now &rarr;</span>
+      </a>
+      <a href="#track-order" class="quick-card reveal d2">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="qc-title">Track My Order</div>
+        <div class="qc-sub">Enter your order ID below to get the latest delivery update for your Mala.</div>
+        <span class="qc-action">Track Order &rarr;</span>
+      </a>
+      <a href="#contact-form" class="quick-card reveal d3">
+        <div class="qc-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="qc-title">Send a Message</div>
+        <div class="qc-sub">For detailed enquiries, bulk orders, or media requests. We reply within 24 hours.</div>
+        <span class="qc-action">Write to Us &rarr;</span>
+      </a>
+      <a href="https://wa.me/919999999999?text=Hi%20Vetriver%2C%20I%20am%20interested%20in%20wholesale%20orders" target="_blank" class="quick-card reveal d4">
+        <div class="qc-icon" style="background:rgba(196,154,60,.1)">
+          <svg viewBox="0 0 24 24" style="stroke:var(--gold)"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/></svg>
+        </div>
+        <div class="qc-title">Wholesale &amp; B2B</div>
+        <div class="qc-sub">Interested in stocking Vetiver Mala at your store, spa, or clinic? Let us talk.</div>
+        <span class="qc-action">Enquire &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- WHATSAPP STRIP -->
+<div class="wa-strip">
+  <div class="wa-inner">
+    <div class="wa-text">
+      <h2>The fastest way to reach us is WhatsApp</h2>
+      <p>Our team is available Monday to Saturday, 9 AM to 7 PM IST. We typically reply within 2 hours. Orders, tracking, product questions — all on WhatsApp.</p>
+    </div>
+    <a href="https://wa.me/919999999999?text=Hi%20Vetriver%2C%20I%27d%20like%20to%20know%20more%20about%20your%20products"
+       target="_blank" class="wa-btn">
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.5 2.04 7.82L.5 31.5l7.87-2.06A15.44 15.44 0 0 0 16 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm8.08 21.28c-.34.96-2 1.84-2.72 1.95-.7.12-1.58.17-2.54-.16-.59-.2-1.34-.47-2.3-.9-4.04-1.74-6.68-5.8-6.88-6.07-.2-.27-1.63-2.17-1.63-4.14s1.03-2.93 1.4-3.34c.36-.4.79-.5 1.06-.5.26 0 .53 0 .76.01.24.01.57-.09.89.68.34.8 1.16 2.77 1.26 2.97.1.2.17.44.03.7-.13.27-.2.44-.4.67-.2.24-.42.53-.6.71-.2.2-.4.41-.17.8.23.4 1.02 1.68 2.2 2.72 1.51 1.35 2.79 1.77 3.19 1.97.4.2.63.17.86-.1.23-.27.99-1.15 1.25-1.55.26-.4.53-.33.9-.2.36.13 2.32 1.1 2.72 1.3.4.2.66.3.76.46.1.17.1.97-.24 1.92z" fill="#25d366"/></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT FORM + SIDEBAR -->
+<div class="contact-main" id="contact-form">
+
+  <!-- FORM -->
+  <div class="contact-form-wrap reveal">
+    <div class="form-title">Send Us a Message</div>
+    <p class="form-sub">Fill in the details below and we will get back to you within 24 hours. For faster replies, use WhatsApp above.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="f-name">Your Name</label>
+        <input class="form-input" id="f-name" type="text" placeholder="Priya Kumari" autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-phone">Phone Number</label>
+        <input class="form-input" id="f-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="f-email">Email Address</label>
+      <input class="form-input" id="f-email" type="email" placeholder="priya@example.com" autocomplete="email"/>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="f-subject">Subject</label>
+      <select class="form-select form-input" id="f-subject">
+        <option value="">Select a topic</option>
+        <option>Order enquiry</option>
+        <option>Track my delivery</option>
+        <option>Return or exchange</option>
+        <option>Product questions</option>
+        <option>Wholesale and B2B</option>
+        <option>Health advice and usage</option>
+        <option>Media and press</option>
+        <option>Something else</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="f-order">Order ID (optional)</label>
+      <input class="form-input" id="f-order" type="text" placeholder="e.g. VTR-20260104-001"/>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="f-message">Your Message</label>
+      <textarea class="form-textarea" id="f-message" placeholder="Tell us how we can help you..."></textarea>
+    </div>
+
+    <button class="form-submit" onclick="submitForm()">Send Message</button>
+    <p class="form-note">We respect your privacy. Your information is never shared with third parties.</p>
+
+    <div class="form-success" id="form-success">
+      <p>Thank you! Your message has been sent. We will reply within 24 hours. For urgent queries, please WhatsApp us directly.</p>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="contact-sidebar">
+
+    <!-- INFO CARD -->
+    <div class="contact-info-card reveal d1">
+      <div class="ci-title">Contact Information</div>
+
+      <div class="ci-row">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div>
+          <div class="ci-label">WhatsApp</div>
+          <div class="ci-value"><a href="https://wa.me/919999999999" target="_blank">+91 99999 99999</a><br/>2-hour response, Mon to Sat</div>
+        </div>
+      </div>
+
+      <div class="ci-row">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value"><a href="mailto:hello@vetriver.in">hello@vetriver.in</a><br/>We reply within 24 hours</div>
+        </div>
+      </div>
+
+      <div class="ci-row">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="ci-label">Shipped From</div>
+          <div class="ci-value">Tamil Nadu, India<br/>Pan-India delivery via Speed Post and Courier</div>
+        </div>
+      </div>
+
+      <div class="ci-row">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div>
+          <div class="ci-label">Instagram</div>
+          <div class="ci-value"><a href="https://instagram.com/vetriverofficial" target="_blank">@vetriverofficial</a><br/>DMs open for enquiries</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOURS -->
+    <div class="hours-card reveal d2">
+      <div class="hours-title">Support Hours</div>
+      <div class="hours-row">
+        <span class="hours-day">Monday to Friday</span>
+        <span class="hours-time">9 AM to 7 PM</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Saturday</span>
+        <span class="hours-time">10 AM to 5 PM</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Sunday</span>
+        <span class="hours-time" style="color:var(--light)">Closed</span>
+      </div>
+      <div style="margin-top:14px;padding:10px 12px;background:rgba(61,122,82,.07);border-radius:var(--r4);font-size:12px;color:var(--fern);">
+        <strong>Order anytime.</strong> Orders placed outside hours are processed the next business day.
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-card reveal d3">
+      <div class="faq-title">Quick Answers</div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How long does delivery take?
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Standard delivery takes 5 to 8 business days across India. Express shipping is available at checkout for 2 to 3 day delivery in major cities.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I return or exchange my Mala?
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Yes. We accept returns within 7 days of delivery if the product is unused and in original packaging. Exchange is available for any size within 14 days.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you offer Cash on Delivery?
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Yes, COD is available on orders up to Rs 2,000. For larger orders, prepayment via UPI, net banking, or card is required.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you ship outside India?
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Currently we ship within India only. International shipping is being set up for 2026. Contact us on WhatsApp for bulk international enquiries.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How do I use the Vetiver Mala?
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">Hang the Mala near your bed, window, or door. Lightly mist with water on dry days. No electricity or maintenance required. Most customers feel the difference within the first night.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ORDER TRACKING -->
+<div class="track-section" id="track-order">
+  <div class="track-inner">
+    <div class="eyebrow reveal">Order Tracking</div>
+    <h2 class="sec-h2 reveal d1">Track Your Delivery</h2>
+    <p class="sec-sub reveal d2">Enter your Vetriver Order ID (found in your confirmation email or WhatsApp receipt) to check the status of your Mala delivery.</p>
+    <div class="track-form reveal d3">
+      <input class="track-input" type="text" id="track-id" placeholder="e.g. VTR-20260104-001"/>
+      <button class="track-btn" onclick="trackOrder()">Track Order</button>
+    </div>
+    <p style="font-size:12px;color:var(--light);margin-top:12px;">Can't find your Order ID? <a href="https://wa.me/919999999999" target="_blank" style="color:var(--fern);">WhatsApp us</a> with your phone number and we'll look it up.</p>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div class="social-section">
+  <div class="social-inner">
+    <p style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Find Us On</p>
+    <h2 style="font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--forest);margin-bottom:28px;">Stay Connected</h2>
+    <div class="social-grid">
+      <a href="https://instagram.com/vetriverofficial" target="_blank" class="social-card reveal d1">
+        <div class="sc-icon" style="background:#e1306c">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div class="sc-name">Instagram</div>
+        <div class="sc-handle">@vetriverofficial</div>
+      </a>
+      <a href="https://youtube.com/@vetriver" target="_blank" class="social-card reveal d2">
+        <div class="sc-icon" style="background:#ff0000">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </div>
+        <div class="sc-name">YouTube</div>
+        <div class="sc-handle">@vetriver</div>
+      </a>
+      <a href="https://wa.me/919999999999" target="_blank" class="social-card reveal d3">
+        <div class="sc-icon" style="background:#25d366">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div class="sc-name">WhatsApp</div>
+        <div class="sc-handle">+91 99999 99999</div>
+      </a>
+      <a href="mailto:hello@vetriver.in" class="social-card reveal d4">
+        <div class="sc-icon" style="background:var(--forest)">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="sc-name">Email</div>
+        <div class="sc-handle">hello@vetriver.in</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="fc-brand">
+        <img class="logo-img-footer"
+             src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/VETRIVER.png"
+             alt="Vetriver"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block';"/>
+        <span class="logo-text-footer">Vetriver</span>
+        <p>Bringing 4,000 years of Tamil Siddha wisdom to your home. Natural wellness for every household in India.</p>
+        <div class="fc-cert">100% Natural &nbsp; Farm-Direct &nbsp; Women-Crafted</div>
+        <div class="fc-social">
+          <a href="https://instagram.com/vetriverofficial" class="social-link" target="_blank">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://youtube.com/@vetriver" class="social-link" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+          <a href="https://wa.me/919999999999" class="social-link" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="fc-col">
+        <h5>Shop</h5>
+        <a href="shop.html#prod1">1 Foot Mala</a>
+        <a href="shop.html#prod2">2 Foot Mala</a>
+        <a href="shop.html#prod3">3 Foot Mala</a>
+        <a href="shop.html#prod4">Nilavu Mala</a>
+      </div>
+      <div class="fc-col">
+        <h5>Learn</h5>
+        <a href="shop.html#health-goals">Health Benefits</a>
+        <a href="about.html">Our Story</a>
+        <a href="blog.html">Stories</a>
+      </div>
+      <div class="fc-col">
+        <h5>Company</h5>
+        <a href="about.html">About Vetriver</a>
+        <a href="about.html#farmers">Farmer Partners</a>
+        <a href="about.html#artisans">Women Artisans</a>
+      </div>
+      <div class="fc-col">
+        <h5>Help</h5>
+        <a href="contact.html">Contact Us</a>
+        <a href="#track-order">Track Order</a>
+        <a href="contact.html">Returns Policy</a>
+        <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2025 Vetriver. All rights reserved. Rooted in Tamil Nadu, growing for the world.</p>
+      <div class="payment-badges">
+        <span class="pay-pill">UPI</span>
+        <span class="pay-pill">Net Banking</span>
+        <span class="pay-pill">Visa</span>
+        <span class="pay-pill">Mastercard</span>
+        <span class="pay-pill">RuPay</span>
+        <span class="pay-pill">COD</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+function toggleNav(){
+  const p=document.getElementById('mobile-panel');
+  const h=document.getElementById('hamburger');
+  if(p.classList.contains('open')){
+    p.classList.remove('open');p.style.display='none';h.classList.remove('open');
+  }else{
+    p.style.display='block';requestAnimationFrame(()=>p.classList.add('open'));h.classList.add('open');
+  }
+}
+function closeNav(){
+  document.getElementById('mobile-panel').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  setTimeout(()=>document.getElementById('mobile-panel').style.display='none',320);
+}
+
+function submitForm(){
+  const name=document.getElementById('f-name').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const msg=document.getElementById('f-message').value.trim();
+  if(!name||!email||!msg){
+    showToast('Please fill in your name, email and message.');return;
+  }
+  document.getElementById('form-success').classList.add('visible');
+  showToast('Message sent! We will reply within 24 hours.');
+  // Reset
+  ['f-name','f-phone','f-email','f-subject','f-order','f-message'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value='';
+  });
+}
+
+function trackOrder(){
+  const id=document.getElementById('track-id').value.trim();
+  if(!id){showToast('Please enter your Order ID.');return;}
+  showToast('Tracking '+id+' — redirecting to WhatsApp for live status.');
+  setTimeout(()=>{
+    window.open('https://wa.me/919999999999?text=Hi%20Vetriver%2C%20please%20track%20my%20order%20'+encodeURIComponent(id),'_blank');
+  },1200);
+}
+
+function toggleFaq(el){
+  const item=el.parentElement;
+  item.classList.toggle('open');
+}
+
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('visible');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('visible'),3800);
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i*55);
+      ro.unobserve(e.target);
+    }
+  });
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

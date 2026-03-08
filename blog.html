@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stories from the Root - Vetriver</title>
+<meta name="description" content="Read about Siddha science, vetiver farming, community stories and health guides from the Vetriver team."/>
+<style>
+:root{--forest:#1a3322;--moss:#2a5238;--fern:#3d7a52;--sage:#6aaa7e;--cream:#f4efe4;--paper:#faf8f3;--ink:#1a1a18;--charcoal:#3a3830;--mid:#6a6558;--light:#a09888;--border:#e4dfd4;--gold:#c49a3c;--gold-lt:#dab86a;--rust:#b85a38;--sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;--max:1280px;--r4:4px;--r8:8px;--s1:0 1px 4px rgba(26,26,24,.06);--s2:0 4px 16px rgba(26,26,24,.10);--s3:0 12px 40px rgba(26,26,24,.13);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sf);background:var(--paper);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:var(--sf);}
+img{display:block;max-width:100%;}
+
+#ann-bar{background:var(--forest);height:36px;display:flex;align-items:center;overflow:hidden;position:relative;}
+.ann-scroll-wrap{overflow:hidden;flex:1;}
+.ann-track{display:flex;white-space:nowrap;animation:annScroll 28s linear infinite;}
+.ann-msg{flex-shrink:0;padding:0 40px;font-size:12px;font-weight:500;letter-spacing:.04em;color:rgba(244,239,228,.88);display:inline-flex;align-items:center;gap:8px;}
+.ann-msg .code{background:var(--gold);color:var(--forest);font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;}
+@keyframes annScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+#header{position:sticky;top:0;z-index:800;background:rgba(250,248,243,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+#header.scrolled{box-shadow:var(--s2);}
+.header-wrap{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:200px 1fr 200px;align-items:center;padding:0 24px;height:64px;}
+.site-logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;object-fit:contain;}
+.logo-text{font-size:20px;font-weight:700;color:var(--forest);display:none;}
+.main-nav{display:flex;align-items:center;justify-content:center;gap:2px;}
+.nav-link{display:block;padding:8px 13px;font-size:13.5px;font-weight:500;color:var(--charcoal);transition:color .18s;position:relative;}
+.nav-link:hover,.nav-link.active{color:var(--forest);}
+.nav-link.active::after{content:'';position:absolute;bottom:-1px;left:13px;right:13px;height:2px;background:var(--gold);border-radius:1px;}
+.nav-item{position:relative;}
+.nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px);background:white;border:1px solid var(--border);border-radius:var(--r8);box-shadow:var(--s3);min-width:200px;z-index:900;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+.nav-item:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.dd-item{display:block;padding:10px 15px;font-size:13px;color:var(--charcoal);border-bottom:1px solid var(--border);transition:background .15s;}
+.dd-item:last-child{border-bottom:none;}
+.dd-item:hover{background:var(--cream);color:var(--forest);}
+.dd-item .dd-price{font-size:11.5px;color:var(--light);margin-left:4px;}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px;}
+.hdr-btn{width:38px;height:38px;border-radius:var(--r4);display:flex;align-items:center;justify-content:center;color:var(--charcoal);transition:background .18s;}
+.hdr-btn:hover{background:var(--cream);}
+.hdr-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.hdr-order-btn{background:var(--forest);color:white;padding:8px 16px;border-radius:var(--r4);font-size:13px;font-weight:600;margin-left:6px;transition:background .2s;}
+.hdr-order-btn:hover{background:var(--moss);}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;}
+.hamburger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:all .28s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-panel{display:none;position:fixed;inset:0;z-index:700;background:white;padding:72px 24px 32px;overflow-y:auto;transform:translateX(-100%);transition:transform .32s;}
+.mobile-panel.open{transform:translateX(0);}
+.mob-nav-link{display:block;padding:14px 0;font-size:16px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--border);}
+
+/* PAGE HERO */
+.page-hero{background:var(--forest);padding:56px 24px;}
+.page-hero-inner{max-width:var(--max);margin:0 auto;}
+.page-breadcrumb{font-size:12px;color:rgba(244,239,228,.4);margin-bottom:12px;}
+.page-breadcrumb a{color:rgba(244,239,228,.4);}
+.page-hero h1{font-size:clamp(28px,4vw,44px);font-weight:700;color:white;letter-spacing:-.025em;margin-bottom:8px;}
+.page-hero p{font-size:15px;color:rgba(244,239,228,.6);max-width:480px;}
+
+/* CATEGORY PILLS */
+.cat-bar{background:white;border-bottom:1px solid var(--border);padding:0 24px;}
+.cat-inner{max-width:var(--max);margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none;}
+.cat-inner::-webkit-scrollbar{display:none;}
+.cat-pill{flex-shrink:0;padding:6px 15px;border-radius:20px;font-size:13px;font-weight:500;border:1.5px solid var(--border);color:var(--mid);cursor:pointer;transition:all .2s;}
+.cat-pill.active,.cat-pill:hover{background:var(--forest);color:white;border-color:var(--forest);}
+
+/* FEATURED ARTICLE */
+.featured-section{padding:56px 24px;}
+.featured-inner{max-width:var(--max);margin:0 auto;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold);}
+.sec-h2{font-size:clamp(22px,2.5vw,32px);font-weight:700;letter-spacing:-.025em;color:var(--forest);margin-bottom:10px;}
+.featured-card{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;background:white;border-radius:12px;border:1px solid var(--border);overflow:hidden;}
+.featured-img{aspect-ratio:4/3;overflow:hidden;}
+.featured-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.featured-card:hover .featured-img img{transform:scale(1.03);}
+.featured-body{padding:40px 40px 40px 0;}
+.f-cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.f-title{font-size:22px;font-weight:700;color:var(--forest);line-height:1.3;margin-bottom:12px;}
+.f-excerpt{font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:20px;}
+.f-meta{font-size:12px;color:var(--light);display:flex;gap:16px;margin-bottom:20px;}
+.read-more{font-size:13.5px;font-weight:700;color:var(--fern);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.read-more:hover{gap:10px;}
+
+/* ARTICLES GRID */
+.articles-section{background:var(--cream);padding:56px 24px;}
+.articles-inner{max-width:var(--max);margin:0 auto;}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+.article-card{background:white;border-radius:var(--r8);border:1px solid var(--border);overflow:hidden;transition:box-shadow .25s,transform .25s;}
+.article-card:hover{box-shadow:var(--s2);transform:translateY(-4px);}
+.a-img{aspect-ratio:16/9;overflow:hidden;}
+.a-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.article-card:hover .a-img img{transform:scale(1.04);}
+.a-body{padding:20px;}
+.a-cat{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.a-title{font-size:15px;font-weight:700;color:var(--forest);line-height:1.35;margin-bottom:8px;}
+.a-excerpt{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:14px;}
+.a-meta{font-size:11.5px;color:var(--light);display:flex;gap:14px;}
+
+/* NEWSLETTER */
+#newsletter{background:linear-gradient(135deg,var(--forest),var(--moss));padding:64px 24px;text-align:center;}
+.nl-inner{max-width:500px;margin:0 auto;}
+.nl-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,154,60,.15);border:1px solid rgba(196,154,60,.35);color:var(--gold-lt);border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 14px;margin-bottom:18px;text-transform:uppercase;}
+.nl-title{font-size:28px;font-weight:700;color:white;margin-bottom:10px;letter-spacing:-.02em;}
+.nl-sub{font-size:14px;color:rgba(244,239,228,.6);margin-bottom:24px;}
+.nl-form{display:flex;gap:8px;max-width:400px;margin:0 auto;}
+.nl-input{flex:1;padding:12px 14px;border-radius:var(--r4);border:1.5px solid rgba(244,239,228,.2);background:rgba(255,255,255,.1);color:white;font-family:var(--sf);font-size:13.5px;outline:none;}
+.nl-input::placeholder{color:rgba(244,239,228,.4);}
+.nl-input:focus{border-color:rgba(196,154,60,.6);}
+.nl-submit{background:var(--gold);color:var(--forest);padding:12px 20px;border-radius:var(--r4);font-size:13px;font-weight:700;white-space:nowrap;transition:background .2s;}
+.nl-submit:hover{background:var(--gold-lt);}
+.nl-fine{font-size:11px;color:rgba(244,239,228,.35);margin-top:10px;}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(244,239,228,.5);padding:52px 24px 28px;}
+.footer-inner{max-width:var(--max);margin:0 auto;}
+.footer-cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px;}
+.fc-brand .logo-img-footer{height:32px;width:auto;margin-bottom:12px;filter:brightness(0) invert(1);opacity:.85;}
+.logo-text-footer{font-size:20px;font-weight:700;color:var(--cream);display:none;margin-bottom:12px;}
+.fc-brand p{font-size:12.5px;line-height:1.8;max-width:220px;margin-bottom:14px;}
+.fc-cert{font-size:11px;font-weight:600;color:var(--sage);letter-spacing:.04em;margin-bottom:14px;}
+.fc-social{display:flex;gap:7px;}
+.social-link{width:32px;height:32px;border-radius:var(--r4);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.social-link:hover{background:var(--fern);}
+.social-link svg{width:14px;height:14px;stroke:rgba(244,239,228,.7);fill:none;stroke-width:1.8;}
+.fc-col h5{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,228,.3);margin-bottom:15px;}
+.fc-col a{display:block;font-size:12.5px;margin-bottom:8px;color:rgba(244,239,228,.5);transition:color .18s;}
+.fc-col a:hover{color:var(--gold-lt);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:11.5px;}
+.payment-badges{display:flex;gap:5px;}
+.pay-pill{background:rgba(255,255,255,.07);border-radius:3px;padding:2px 8px;font-size:10.5px;font-weight:600;color:rgba(244,239,228,.45);}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.reveal.d1{transition-delay:.08s;}.reveal.d2{transition-delay:.16s;}.reveal.d3{transition-delay:.24s;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:768px){
+  .header-wrap{grid-template-columns:auto 1fr auto;}
+  .main-nav{display:none;}
+  .hamburger{display:flex;}
+  .hdr-order-btn{display:none;}
+  .featured-card{grid-template-columns:1fr;}
+  .featured-body{padding:24px;}
+  .articles-grid{grid-template-columns:1fr 1fr;}
+  .footer-cols{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .articles-grid{grid-template-columns:1fr;}
+  .nl-form{flex-direction:column;}
+  .footer-cols{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div id="ann-bar">
+  <div class="ann-scroll-wrap"><div class="ann-track">
+    <span class="ann-msg">Summer Cooling Sale — Use code <span class="code">COOL20</span> for 20% off</span>
+    <span class="ann-msg">Free Pan-India Shipping on orders above Rs 999</span>
+    <span class="ann-msg">Summer Cooling Sale — Use code <span class="code">COOL20</span> for 20% off</span>
+    <span class="ann-msg">Free Pan-India Shipping on orders above Rs 999</span>
+  </div></div>
+</div>
+
+<header id="header">
+  <div class="header-wrap">
+    <a href="index.html" class="site-logo">
+      <img class="logo-img" src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/VETRIVER.png" alt="Vetriver" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"/>
+      <span class="logo-text">Vetriver</span>
+    </a>
+    <nav class="main-nav">
+      <div class="nav-item">
+        <a href="shop.html" class="nav-link">Shop Mala</a>
+        <div class="nav-dropdown">
+          <a href="shop.html#prod1" class="dd-item">1 Foot Mala <span class="dd-price">Rs 300</span></a>
+          <a href="shop.html#prod2" class="dd-item">2 Foot Mala <span class="dd-price">Rs 550</span></a>
+          <a href="shop.html#prod3" class="dd-item">3 Foot Mala <span class="dd-price">Rs 800</span></a>
+          <a href="shop.html#prod4" class="dd-item">Nilavu Mala <span class="dd-price">Rs 1,200</span></a>
+        </div>
+      </div>
+      <a href="shop.html#health-goals" class="nav-link">Health Goals</a>
+      <a href="about.html" class="nav-link">Our Roots</a>
+      <a href="index.html#reviews" class="nav-link">Reviews</a>
+      <a href="blog.html" class="nav-link active">Stories</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="hdr-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <a href="shop.html" class="hdr-order-btn">Order Now</a>
+      <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-panel" id="mobile-panel">
+  <a class="mob-nav-link" href="shop.html" onclick="closeNav()">Shop Mala</a>
+  <a class="mob-nav-link" href="about.html" onclick="closeNav()">Our Roots</a>
+  <a class="mob-nav-link" href="blog.html" onclick="closeNav()">Stories</a>
+  <a class="mob-nav-link" href="contact.html" onclick="closeNav()">Contact</a>
+  <div style="margin-top:24px"><a href="shop.html" class="btn-primary" style="display:block;text-align:center;background:var(--forest);color:white;padding:13px;border-radius:4px;font-weight:600;" onclick="closeNav()">Order Now</a></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> / Stories</div>
+    <h1>Farmers Kitaab</h1>
+    <p>Stories of healing, science, community and ancient wisdom from Tamil Nadu's vetiver roots.</p>
+  </div>
+</div>
+
+<div class="cat-bar">
+  <div class="cat-inner">
+    <div class="cat-pill active">All Stories</div>
+    <div class="cat-pill">Siddha Science</div>
+    <div class="cat-pill">Health Guide</div>
+    <div class="cat-pill">Community</div>
+    <div class="cat-pill">Farming</div>
+    <div class="cat-pill">Product</div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-section">
+  <div class="featured-inner">
+    <div class="eyebrow reveal">Featured Story</div>
+    <div class="featured-card reveal d1">
+      <div class="featured-img">
+        <img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver Mala display staircase"/>
+      </div>
+      <div class="featured-body">
+        <div class="f-cat">Siddha Science</div>
+        <h2 class="f-title">Why Tamil Siddha Healers Called Vetiver the Universal Stabilizer</h2>
+        <div class="f-meta"><span>5 min read</span><span>Vetriver Team</span><span>Feb 2026</span></div>
+        <p class="f-excerpt">For 4,000 years, Siddha practitioners prescribed Chrysopogon zizanioides for everything from fever to respiratory disease. The ancient texts describe a plant that works on all three body humors simultaneously — stabilizing heat, clearing obstructions, and calming the mind. Here is the science behind their wisdom.</p>
+        <a href="#" class="read-more">Read Full Story &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<div class="articles-section">
+  <div class="articles-inner">
+    <div class="reveal">
+      <div class="eyebrow">All Stories</div>
+      <h2 class="sec-h2">From the Root</h2>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card reveal d1">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Vetiver close up"/></div>
+        <div class="a-body">
+          <div class="a-cat">Community</div>
+          <div class="a-title">Meet Savithri, Who Weaves Each Mala with 20 Years of Intention</div>
+          <div class="a-excerpt">From her home in Villupuram, Savithri weaves 8 to 12 Mala a day, connecting your home to a centuries-old tradition.</div>
+          <div class="a-meta"><span>4 min read</span><span>Divya R.</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal d2">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Vetiver at window"/></div>
+        <div class="a-body">
+          <div class="a-cat">Health Guide</div>
+          <div class="a-title">Asthma, Sinus and Insomnia: How Vetiver Works on 3 Conditions at Once</div>
+          <div class="a-excerpt">Vetiver's 100+ sesquiterpene compounds create a cascade of effects on the respiratory system, nervous system, and thermal regulation simultaneously.</div>
+          <div class="a-meta"><span>7 min read</span><span>Vetriver Team</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal d3">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145449.jpg.jpeg" alt="Vetiver sun craft"/></div>
+        <div class="a-body">
+          <div class="a-cat">Farming</div>
+          <div class="a-title">How Three Districts of Tamil Nadu Grow the World's Most Healing Grass</div>
+          <div class="a-excerpt">Villupuram, Dindigul and Salem each produce Vetiver with distinct properties. The soil composition directly determines the therapeutic potency of each root.</div>
+          <div class="a-meta"><span>6 min read</span><span>Ravi K.</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal d1">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145741.jpg.jpeg" alt="Vetiver display collection"/></div>
+        <div class="a-body">
+          <div class="a-cat">Product</div>
+          <div class="a-title">Nilavu Mala vs Standard Mala: Which Size Does Your Home Need?</div>
+          <div class="a-excerpt">A practical guide to choosing the right Vetiver Mala for each room and use case. From bedside to entrance doors, the size matters.</div>
+          <div class="a-meta"><span>3 min read</span><span>Vetriver Team</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal d2">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_145733.jpg.jpeg" alt="Vetiver roots detail"/></div>
+        <div class="a-body">
+          <div class="a-cat">Siddha Science</div>
+          <div class="a-title">The Sesquiterpene Secret: Why Vetiver Roots Outlast Every Synthetic Alternative</div>
+          <div class="a-excerpt">Modern research confirms what Siddha texts described 4,000 years ago. The molecular structure of Vetiver roots makes their therapeutic compounds uniquely stable.</div>
+          <div class="a-meta"><span>8 min read</span><span>Dr. Meena S.</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal d3">
+        <div class="a-img"><img src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/Gallery/20260227_150142.jpg.jpeg" alt="Vetiver in home"/></div>
+        <div class="a-body">
+          <div class="a-cat">Community</div>
+          <div class="a-title">How Rs 13 Lakhs Came from One Video: The Vetriver Origin Story</div>
+          <div class="a-excerpt">A single customer testimonial video went viral and generated 13 Lakhs in orders. The story of how Vetriver began and where it is going.</div>
+          <div class="a-meta"><span>5 min read</span><span>Vetriver Team</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div id="newsletter">
+  <div class="nl-inner">
+    <div class="nl-badge">Join the Community</div>
+    <h2 class="nl-title">New Stories Every Week</h2>
+    <p class="nl-sub">Get the latest from Tamil Nadu's vetiver farms, Siddha science updates and exclusive offers for subscribers.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="Your email address"/>
+      <button class="nl-submit">Subscribe Free</button>
+    </div>
+    <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="fc-brand">
+        <img class="logo-img-footer" src="https://raw.githubusercontent.com/BirdscaleTech/Vetriver-Web-site/main/VETRIVER.png" alt="Vetriver" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"/>
+        <span class="logo-text-footer">Vetriver</span>
+        <p>Bringing 4,000 years of Tamil Siddha wisdom to your home. Natural wellness for every household in India.</p>
+        <div class="fc-cert">100% Natural &nbsp; Farm-Direct &nbsp; Women-Crafted</div>
+        <div class="fc-social">
+          <a href="https://instagram.com/vetriverofficial" class="social-link" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://wa.me/919999999999" class="social-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="fc-col"><h5>Shop</h5><a href="shop.html#prod1">1 Foot Mala</a><a href="shop.html#prod2">2 Foot Mala</a><a href="shop.html#prod3">3 Foot Mala</a><a href="shop.html#prod4">Nilavu Mala</a></div>
+      <div class="fc-col"><h5>Learn</h5><a href="shop.html#health-goals">Health Benefits</a><a href="about.html">Our Story</a><a href="blog.html">Stories</a></div>
+      <div class="fc-col"><h5>Company</h5><a href="about.html">About Vetriver</a><a href="about.html#farmers">Farmer Partners</a><a href="about.html#artisans">Women Artisans</a></div>
+      <div class="fc-col"><h5>Help</h5><a href="contact.html">Contact Us</a><a href="contact.html">Track Order</a><a href="contact.html">Returns Policy</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2025 Vetriver. All rights reserved. Rooted in Tamil Nadu.</p>
+      <div class="payment-badges"><span class="pay-pill">UPI</span><span class="pay-pill">Net Banking</span><span class="pay-pill">Visa</span><span class="pay-pill">Mastercard</span><span class="pay-pill">RuPay</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){const p=document.getElementById('mobile-panel');const h=document.getElementById('hamburger');if(p.classList.contains('open')){p.classList.remove('open');p.style.display='none';h.classList.remove('open');}else{p.style.display='block';requestAnimationFrame(()=>p.classList.add('open'));h.classList.add('open');}}
+function closeNav(){document.getElementById('mobile-panel').classList.remove('open');document.getElementById('hamburger').classList.remove('open');setTimeout(()=>document.getElementById('mobile-panel').style.display='none',320);}
+window.addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',window.scrollY>40),{passive:true});
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);ro.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
